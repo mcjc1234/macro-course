@@ -3,674 +3,1000 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Global Macroeconomics — Interactive Study Guide</title>
+<title>GME Interactive Study Guide — Sessions 1–9</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0f2744;--navy-mid:#1a3a5c;--navy-light:#264d73;
+  --gold:#c9a84c;--gold-light:#e8c97a;
+  --cream:#f7f4ee;--cream-dark:#ede9e0;
+  --text:#1a1a2e;--text-muted:#5a6070;--white:#ffffff;
+  --green:#1a6b4a;--green-bg:#eaf4ef;--green-b:#b2d8c5;
+  --red:#8b2020;--red-bg:#fdf0f0;--red-b:#f0c0c0;
+  --amber:#7a4f00;--amber-bg:#fdf5e6;--amber-b:#f0d090;
+  --blue:#0f3d6e;--blue-bg:#e8f0fa;--blue-b:#b0c8e8;
+  --purple:#4a1a8b;--purple-bg:#f0ebfa;--purple-b:#c8b0e8;
+  --r:10px;--sh:0 2px 16px rgba(15,39,68,.10)
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);line-height:1.6;min-height:100vh}
 
-  :root {
-    --navy: #0f2744;
-    --navy-mid: #1a3a5c;
-    --navy-light: #264d73;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --cream: #f7f4ee;
-    --cream-dark: #ede9e0;
-    --text: #1a1a2e;
-    --text-muted: #5a6070;
-    --white: #ffffff;
-    --green: #1a6b4a;
-    --green-bg: #eaf4ef;
-    --red: #8b2020;
-    --red-bg: #fdf0f0;
-    --amber: #7a4f00;
-    --amber-bg: #fdf5e6;
-    --blue: #0f3d6e;
-    --blue-bg: #e8f0fa;
-    --radius: 10px;
-    --shadow: 0 2px 16px rgba(15,39,68,0.10);
-  }
+/* HEADER */
+header{background:var(--navy);color:var(--white);padding:44px 24px 32px;text-align:center;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(201,168,76,.04) 40px,rgba(201,168,76,.04) 41px)}
+.hbadge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:5px 14px;border-radius:20px;margin-bottom:14px}
+header h1{font-family:'DM Serif Display',serif;font-size:clamp(24px,5vw,40px);font-weight:400;line-height:1.2;margin-bottom:8px}
+header h1 em{font-style:italic;color:var(--gold-light)}
+header p{font-size:14px;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+/* SESSION TABS */
+.tab-bar{background:var(--navy-mid);display:flex;overflow-x:auto;scrollbar-width:none;gap:2px;padding:0 12px}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,.5);background:none;border:none;padding:13px 16px;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;white-space:nowrap}
+.tab-btn:hover{color:rgba(255,255,255,.8)}
+.tab-btn.active{color:var(--gold-light);border-bottom-color:var(--gold)}
 
-  /* ── HEADER ── */
-  header {
-    background: var(--navy);
-    color: var(--white);
-    padding: 48px 24px 36px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(201,168,76,0.04) 40px,
-      rgba(201,168,76,0.04) 41px
-    );
-  }
-  .header-badge {
-    display: inline-block;
-    font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gold); border: 1px solid var(--gold);
-    padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
-  }
-  header h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(26px, 5vw, 42px);
-    font-weight: 400; line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  header h1 em { font-style: italic; color: var(--gold-light); }
-  header p {
-    font-size: 15px; color: rgba(255,255,255,0.65);
-    max-width: 520px; margin: 0 auto;
-  }
+/* MAIN */
+main{max-width:880px;margin:0 auto;padding:28px 18px 60px}
+.session{display:none;animation:fadeIn .25s ease}
+.session.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 
-  /* ── NAV TABS ── */
-  .tab-bar {
-    background: var(--navy-mid);
-    display: flex; overflow-x: auto;
-    scrollbar-width: none; gap: 2px; padding: 0 16px;
-  }
-  .tab-bar::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    flex-shrink: 0;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px; font-weight: 500;
-    color: rgba(255,255,255,0.55);
-    background: none; border: none;
-    padding: 14px 20px;
-    cursor: pointer; transition: all .2s;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-  }
-  .tab-btn:hover { color: rgba(255,255,255,0.85); }
-  .tab-btn.active {
-    color: var(--gold-light);
-    border-bottom-color: var(--gold);
-  }
+/* SESSION HEADER */
+.s-head{margin-bottom:22px}
+.s-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);background:var(--navy);padding:4px 12px;border-radius:20px;margin-bottom:8px}
+.s-title{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:var(--navy);margin-bottom:4px}
+.s-desc{font-size:14px;color:var(--text-muted);line-height:1.7}
 
-  /* ── MAIN LAYOUT ── */
-  main { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+/* STEP NAV */
+.step-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.sp{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 13px;border-radius:20px;border:1px solid var(--cream-dark);background:var(--white);color:var(--text-muted);cursor:pointer;transition:all .15s}
+.sp:hover{border-color:var(--navy-light);color:var(--navy)}
+.sp.active{background:var(--navy);color:var(--gold-light);border-color:var(--navy)}
+.step-panel{display:none}
+.step-panel.active{display:block;animation:fadeIn .2s ease}
+.snav{display:flex;gap:10px;margin-top:16px}
+.snav button{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 18px;border-radius:var(--r);border:1px solid var(--cream-dark);background:var(--white);color:var(--text-muted);cursor:pointer;transition:all .15s}
+.snav button:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
 
-  .module { display: none; animation: fadeIn .25s ease; }
-  .module.active { display: block; }
-  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r);padding:18px 20px;margin-bottom:12px;box-shadow:var(--sh)}
+.card-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:5px}
+.card-body{font-size:14px;color:var(--text-muted);line-height:1.7}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin:12px 0}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:9px;margin:12px 0}
+.sc{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r);padding:13px 15px;box-shadow:var(--sh)}
+.sc .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:3px}
+.sc .val{font-size:15px;font-weight:600;color:var(--navy);line-height:1.4}
+.sc.gr{background:var(--green-bg);border-color:var(--green-b)}.sc.gr .val{color:var(--green)}
+.sc.re{background:var(--red-bg);border-color:var(--red-b)}.sc.re .val{color:var(--red)}
+.sc.am{background:var(--amber-bg);border-color:var(--amber-b)}.sc.am .val{color:var(--amber)}
+.sc.bl{background:var(--blue-bg);border-color:var(--blue-b)}.sc.bl .val{color:var(--blue)}
+.sc.pu{background:var(--purple-bg);border-color:var(--purple-b)}.sc.pu .val{color:var(--purple)}
+.formula{background:var(--navy);color:var(--gold-light);border-radius:var(--r);padding:13px 18px;text-align:center;font-size:16px;font-weight:600;letter-spacing:.5px;margin:12px 0}
+.verdict{border-radius:var(--r);padding:10px 15px;font-size:14px;font-weight:500;margin:11px 0;border-left:3px solid}
+.verdict.eq{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+.verdict.ov{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+.verdict.un{background:var(--amber-bg);border-color:#c47a00;color:var(--amber)}
+.verdict.in{background:var(--blue-bg);border-color:var(--blue);color:var(--blue)}
+.insight{font-size:13px;color:var(--text-muted);background:var(--blue-bg);border-left:3px solid #4a90d4;border-radius:0 var(--r) var(--r) 0;padding:9px 13px;margin:11px 0;line-height:1.65}
+.insight strong{color:var(--text);font-weight:500}
+.divider{border:none;border-top:1px solid var(--cream-dark);margin:16px 0}
+.flow-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:10px 0}
+.fb{font-size:12px;font-weight:500;padding:7px 11px;border-radius:var(--r);background:var(--cream);border:1px solid var(--cream-dark);color:var(--text)}
+.fb.bl{background:var(--blue-bg);border-color:var(--blue-b);color:var(--blue)}
+.fb.gr{background:var(--green-bg);border-color:var(--green-b);color:var(--green)}
+.fb.re{background:var(--red-bg);border-color:var(--red-b);color:var(--red)}
+.fb.am{background:var(--amber-bg);border-color:var(--amber-b);color:var(--amber)}
+.farr{color:var(--text-muted);font-size:15px}
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}
+.hi{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r);padding:11px 9px;text-align:center;font-size:13px;font-weight:500;color:var(--navy);box-shadow:var(--sh)}
+.gap-bar-wrap{margin:12px 0}
+.gb-lbl{font-size:12px;color:var(--text-muted);margin-bottom:4px}
+.gb-track{height:10px;border-radius:5px;background:var(--cream-dark);overflow:hidden;margin-bottom:8px}
+.gb-fill{height:100%;border-radius:5px}
 
-  .module-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px; font-weight: 400;
-    color: var(--navy); margin-bottom: 6px;
-  }
-  .module-desc {
-    font-size: 14px; color: var(--text-muted);
-    margin-bottom: 24px; line-height: 1.7;
-  }
+/* INTERACTIVE MULTIPLIER */
+.calc-wrap{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r);padding:18px 20px;margin:12px 0;box-shadow:var(--sh)}
+.calc-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.calc-label{font-size:13px;color:var(--text-muted);min-width:180px}
+.calc-row input[type=range]{flex:1;min-width:120px}
+.calc-val{font-size:14px;font-weight:600;color:var(--navy);min-width:40px;text-align:right}
+.calc-result{background:var(--navy);color:var(--gold-light);border-radius:var(--r);padding:12px 16px;text-align:center;margin-top:12px}
+.calc-result .big{font-size:26px;font-weight:600}
+.calc-result .sub{font-size:13px;color:rgba(255,255,255,.6);margin-top:2px}
 
-  /* ── CARDS ── */
-  .card {
-    background: var(--white);
-    border: 1px solid var(--cream-dark);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    margin-bottom: 14px;
-    box-shadow: var(--shadow);
-  }
-  .card-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
-  .card-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+/* INTERACTIVE FISCAL */
+.fiscal-sim{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r);padding:18px 20px;margin:12px 0;box-shadow:var(--sh)}
+.fs-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}
+.fs-card{border-radius:var(--r);padding:13px;text-align:center;border:1px solid var(--cream-dark)}
+.fs-card .lbl{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.fs-card .val{font-size:22px;font-weight:600}
 
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 14px 0; }
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
-  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 14px 0; }
+/* RATE SLIDER SIM */
+.rate-sim{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r);padding:18px 20px;margin:12px 0;box-shadow:var(--sh)}
+.rate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:12px}
+.rate-card{border-radius:var(--r);padding:10px;text-align:center;border:1px solid var(--cream-dark);background:var(--cream);transition:all .3s}
+.rate-card .icon{font-size:20px;margin-bottom:4px}
+.rate-card .name{font-size:11px;color:var(--text-muted);margin-bottom:2px}
+.rate-card .effect{font-size:13px;font-weight:600}
 
-  .stat-card {
-    background: var(--white);
-    border: 1px solid var(--cream-dark);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    box-shadow: var(--shadow);
-  }
-  .stat-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 4px; }
-  .stat-card .val { font-size: 16px; font-weight: 600; color: var(--navy); line-height: 1.4; }
-  .stat-card.green { background: var(--green-bg); border-color: #b2d8c5; }
-  .stat-card.green .val { color: var(--green); }
-  .stat-card.red { background: var(--red-bg); border-color: #f0c0c0; }
-  .stat-card.red .val { color: var(--red); }
-  .stat-card.amber { background: var(--amber-bg); border-color: #f0d090; }
-  .stat-card.amber .val { color: var(--amber); }
-  .stat-card.blue { background: var(--blue-bg); border-color: #b0c8e8; }
-  .stat-card.blue .val { color: var(--blue); }
-
-  .formula {
-    background: var(--navy);
-    color: var(--gold-light);
-    border-radius: var(--radius);
-    padding: 14px 20px;
-    text-align: center;
-    font-size: 17px; font-weight: 600;
-    letter-spacing: .5px;
-    margin: 14px 0;
-  }
-
-  .verdict {
-    border-radius: var(--radius);
-    padding: 11px 16px;
-    font-size: 14px; font-weight: 500;
-    margin: 12px 0; border-left: 3px solid;
-  }
-  .verdict.eq { background: var(--green-bg); border-color: var(--green); color: var(--green); }
-  .verdict.over { background: var(--red-bg); border-color: var(--red); color: var(--red); }
-  .verdict.under { background: var(--amber-bg); border-color: #c47a00; color: var(--amber); }
-
-  .insight {
-    font-size: 13px; color: var(--text-muted);
-    background: var(--blue-bg);
-    border-left: 3px solid #4a90d4;
-    border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 10px 14px; margin: 12px 0; line-height: 1.65;
-  }
-
-  .divider { border: none; border-top: 1px solid var(--cream-dark); margin: 18px 0; }
-
-  /* ── STEP NAV (for AE module) ── */
-  .step-pills {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
-  }
-  .step-pill {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 500;
-    padding: 6px 14px; border-radius: 20px;
-    border: 1px solid var(--cream-dark);
-    background: var(--white); color: var(--text-muted);
-    cursor: pointer; transition: all .15s;
-  }
-  .step-pill:hover { border-color: var(--navy-light); color: var(--navy); }
-  .step-pill.active {
-    background: var(--navy); color: var(--gold-light);
-    border-color: var(--navy);
-  }
-  .step-panel { display: none; }
-  .step-panel.active { display: block; animation: fadeIn .2s ease; }
-
-  .step-nav-btns { display: flex; gap: 10px; margin-top: 18px; }
-  .step-nav-btns button {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px; font-weight: 500;
-    padding: 9px 20px; border-radius: var(--radius);
-    border: 1px solid var(--cream-dark);
-    background: var(--white); color: var(--text-muted);
-    cursor: pointer; transition: all .15s;
-  }
-  .step-nav-btns button:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
-
-  /* ── CONCEPT NAV (for concepts module) ── */
-  .concept-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .concept-pill {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px; font-weight: 500;
-    padding: 6px 14px; border-radius: 20px;
-    border: 1px solid var(--cream-dark);
-    background: var(--white); color: var(--text-muted);
-    cursor: pointer; transition: all .15s;
-  }
-  .concept-pill:hover { border-color: var(--navy-light); color: var(--navy); }
-  .concept-pill.active {
-    background: var(--navy); color: var(--gold-light);
-    border-color: var(--navy);
-  }
-  .concept-panel { display: none; }
-  .concept-panel.active { display: block; animation: fadeIn .2s ease; }
-
-  /* ── FLOW ROW ── */
-  .flow-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
-  .flow-box {
-    font-size: 12px; font-weight: 500; padding: 7px 12px;
-    border-radius: var(--radius);
-    background: var(--cream); border: 1px solid var(--cream-dark);
-    color: var(--text);
-  }
-  .flow-box.blue { background: var(--blue-bg); border-color: #b0c8e8; color: var(--blue); }
-  .flow-box.green { background: var(--green-bg); border-color: #b2d8c5; color: var(--green); }
-  .flow-box.red { background: var(--red-bg); border-color: #f0c0c0; color: var(--red); }
-  .flow-box.amber { background: var(--amber-bg); border-color: #f0d090; color: var(--amber); }
-  .flow-arr { color: var(--text-muted); font-size: 16px; }
-
-  /* ── HEX GRID ── */
-  .hex-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
-  .hex-item {
-    background: var(--white); border: 1px solid var(--cream-dark);
-    border-radius: var(--radius); padding: 12px 10px; text-align: center;
-    font-size: 13px; font-weight: 500; color: var(--navy);
-    box-shadow: var(--shadow);
-  }
-
-  /* ── GAP BAR ── */
-  .gap-bar-wrap { margin: 14px 0; }
-  .gap-bar-label { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
-  .gap-bar-track { height: 10px; border-radius: 5px; background: var(--cream-dark); overflow: hidden; margin-bottom: 10px; }
-  .gap-bar-fill { height: 100%; border-radius: 5px; }
-
-  /* ── FOOTER ── */
-  footer {
-    text-align: center;
-    padding: 24px;
-    font-size: 12px; color: var(--text-muted);
-    background: var(--navy);
-    color: rgba(255,255,255,0.4);
-  }
-  footer strong { color: var(--gold); font-weight: 500; }
+/* FOOTER */
+footer{text-align:center;padding:20px;font-size:12px;background:var(--navy);color:rgba(255,255,255,.35)}
+footer strong{color:var(--gold);font-weight:500}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-badge">Cranfield University · GME Module</div>
+  <div class="hbadge">Cranfield University · GME Module</div>
   <h1>Global Macroeconomics<br><em>Interactive Study Guide</em></h1>
-  <p>Day 1 core concepts — built to help you get the most from the course</p>
+  <p>Sessions 1–9 · Real-world examples with round numbers · Built for your cohort</p>
 </header>
 
-<div class="tab-bar">
-  <button class="tab-btn active" onclick="showModule('concepts')">Day 1 Concepts</button>
-  <button class="tab-btn" onclick="showModule('ape')">APE & Equilibrium</button>
+<div class="tab-bar" id="tabBar">
+  <button class="tab-btn active" onclick="showSession(0,this)">S1: Intro</button>
+  <button class="tab-btn" onclick="showSession(1,this)">S2: Measuring GDP</button>
+  <button class="tab-btn" onclick="showSession(2,this)">S3: Modelling</button>
+  <button class="tab-btn" onclick="showSession(3,this)">S4: Determination</button>
+  <button class="tab-btn" onclick="showSession(4,this)">S5: AD/AS</button>
+  <button class="tab-btn" onclick="showSession(5,this)">S6: Managing</button>
+  <button class="tab-btn" onclick="showSession(6,this)">S7: Fiscal Policy</button>
+  <button class="tab-btn" onclick="showSession(7,this)">S8: Money & Banks</button>
+  <button class="tab-btn" onclick="showSession(8,this)">S9: Monetary Policy</button>
 </div>
 
 <main>
 
-<!-- ══════════════════════════════════════════════ -->
-<!--  MODULE 1: DAY 1 CONCEPTS                      -->
-<!-- ══════════════════════════════════════════════ -->
-<div class="module active" id="mod-concepts">
-  <h2 class="module-title">Day 1 — Core Concepts</h2>
-  <p class="module-desc">Eight interconnected ideas that underpin the whole course. Work through them in order for the clearest picture.</p>
-
-  <div class="concept-pills">
-    <button class="concept-pill active" onclick="showConcept('intro')">1. What is macro?</button>
-    <button class="concept-pill" onclick="showConcept('gdp')">2. Measuring GDP</button>
-    <button class="concept-pill" onclick="showConcept('circular')">3. Circular flow</button>
-    <button class="concept-pill" onclick="showConcept('adas')">4. AD / AS</button>
-    <button class="concept-pill" onclick="showConcept('objectives')">5. Policy objectives</button>
-    <button class="concept-pill" onclick="showConcept('fiscal')">6. Fiscal policy</button>
-    <button class="concept-pill" onclick="showConcept('money')">7. Money & interest</button>
-    <button class="concept-pill" onclick="showConcept('schools')">8. Schools of thought</button>
+<!-- ═══════════════════════════════════════════════ SESSION 1 ══ -->
+<div class="session active" id="s0">
+  <div class="s-head">
+    <div class="s-tag">Session 1</div>
+    <div class="s-title">Introduction to Macroeconomics</div>
+    <div class="s-desc">What is macroeconomics, why does it matter for managers, and what are governments actually trying to achieve?</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s0',0,this)">Micro vs Macro</button>
+    <button class="sp" onclick="step('s0',1,this)">Why it matters</button>
+    <button class="sp" onclick="step('s0',2,this)">Policy objectives</button>
+    <button class="sp" onclick="step('s0',3,this)">Schools of thought</button>
   </div>
 
-  <!-- 1 -->
-  <div class="concept-panel active" id="cp-intro">
-    <div class="card">
-      <div class="card-title">What is macroeconomics?</div>
-      <div class="card-body">Macroeconomics looks at the economy as a whole — not individual markets, but the total picture. Think of it like a jigsaw puzzle: microeconomics studies each piece independently; macroeconomics studies the whole image.</div>
+  <div class="step-panel active" id="s0p0">
+    <div class="card"><div class="card-title">Micro vs Macro — the jigsaw analogy</div><div class="card-body">Microeconomics studies individual pieces of the jigsaw. Macroeconomics studies the complete picture.</div></div>
+    <div class="g2">
+      <div class="sc bl"><div class="lbl">Microeconomics</div><div class="val">Why did the price of eggs rise 20% this year?</div></div>
+      <div class="sc gr"><div class="lbl">Macroeconomics</div><div class="val">Why did the whole UK economy grow by 2%?</div></div>
     </div>
-    <div class="grid-2">
-      <div class="stat-card"><div class="lbl">Microeconomics</div><div class="val">Individual markets, firms, consumers — price of one good</div></div>
-      <div class="stat-card blue"><div class="lbl">Macroeconomics</div><div class="val">Total output, national income, price level, employment, trade</div></div>
+    <div class="card"><div class="card-title">What macro actually studies</div><div class="card-body">Think of the UK as a single entity. Macro asks: How much does it earn? How much does it spend? Are prices rising? How many people have jobs?</div></div>
+    <div class="g4">
+      <div class="sc"><div class="lbl">Total output</div><div class="val">GDP / GNP</div></div>
+      <div class="sc"><div class="lbl">Price level</div><div class="val">Inflation</div></div>
+      <div class="sc"><div class="lbl">Jobs</div><div class="val">Employment</div></div>
+      <div class="sc"><div class="lbl">Trade</div><div class="val">Balance of payments</div></div>
     </div>
-    <div class="card">
-      <div class="card-title">The three manager questions</div>
-      <div class="grid-3" style="margin-top:10px;">
-        <div class="stat-card green"><div class="lbl">Question 1</div><div class="val">What drives economic activity?</div></div>
-        <div class="stat-card green"><div class="lbl">Question 2</div><div class="val">How can policy influence it?</div></div>
-        <div class="stat-card green"><div class="lbl">Question 3</div><div class="val">What are the implications for business?</div></div>
+    <div class="insight">A pub chain manager cares about micro (beer prices). The Chancellor cares about macro (whether 30 million people can afford to buy anything at all).</div>
+  </div>
+
+  <div class="step-panel" id="s0p1">
+    <div class="card"><div class="card-title">Why macro matters to you as a manager</div><div class="card-body">The macro environment sets the water level your business swims in. Even a perfectly run company drowns in a deep recession.</div></div>
+    <div class="g3">
+      <div class="sc re"><div class="lbl">Interest rates rise 3%</div><div class="val">Your mortgage costs surge. Consumer spending drops. Your sales fall.</div></div>
+      <div class="sc am"><div class="lbl">Inflation at 10%</div><div class="val">Your input costs soar. Wage demands rise. Margins squeezed.</div></div>
+      <div class="sc gr"><div class="lbl">GDP grows 4%</div><div class="val">Consumer confidence high. Hiring easy. Investment pays off.</div></div>
+    </div>
+    <div class="insight">The three macro questions for managers: (1) What's driving activity? (2) What will policy do next? (3) What does it mean for my business?</div>
+  </div>
+
+  <div class="step-panel" id="s0p2">
+    <div class="card"><div class="card-title">The "Magic Hexagon" — what governments are trying to do</div><div class="card-body">No government can achieve all six simultaneously. They constantly trade off against each other.</div></div>
+    <div class="hgrid">
+      <div class="hi">High sustained growth</div>
+      <div class="hi">Full employment</div>
+      <div class="hi">Low & stable inflation</div>
+      <div class="hi">Sustainable trade balance</div>
+      <div class="hi">Stable exchange rate</div>
+      <div class="hi">Environmental limits</div>
+    </div>
+    <div class="card"><div class="card-title">The classic trade-off: inflation vs unemployment</div><div class="card-body">Push unemployment down too far (boost spending) and inflation rises. Crush inflation (cut spending, raise rates) and unemployment rises. Governments are always navigating between these two.</div></div>
+    <div class="verdict un">Example: 2022 UK — Bank of England raised rates 14 times to fight 11% inflation, knowing it would slow the economy and cost jobs.</div>
+  </div>
+
+  <div class="step-panel" id="s0p3">
+    <div class="card"><div class="card-title">Four schools of thought — the intellectual map</div><div class="card-body">Every policy debate you'll see in the news traces back to one of these four traditions.</div></div>
+    <div class="g2">
+      <div class="sc"><div class="lbl">Pre-Keynesian (pre-1930s)</div><div class="val">Markets self-correct. Government: stay out. Trust the invisible hand.</div></div>
+      <div class="sc bl"><div class="lbl">Keynesian (1936–70s)</div><div class="val">Markets fail. Government must spend to fill the gap. Furlough scheme = modern Keynesianism.</div></div>
+      <div class="sc am"><div class="lbl">Monetarist (1970s–80s)</div><div class="val">Inflation is the enemy. Control the money supply. Thatcher's Britain.</div></div>
+      <div class="sc gr"><div class="lbl">Supply-side (1980s–now)</div><div class="val">Grow productive capacity. Deregulate. Cut taxes on business. Laffer curve.</div></div>
+    </div>
+    <div class="insight">The 2008 crash and COVID both caused temporary Keynesian revivals — even monetarist governments ended up spending massively. The debate never really ends.</div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s0')">← Back</button><button onclick="nextStep('s0',4)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 2 ══ -->
+<div class="session" id="s1">
+  <div class="s-head">
+    <div class="s-tag">Session 2</div>
+    <div class="s-title">Measuring Economic Activity</div>
+    <div class="s-desc">GDP, GNP, real vs nominal, and why the numbers in the news can be misleading.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s1',0,this)">What is GDP?</button>
+    <button class="sp" onclick="step('s1',1,this)">Three methods</button>
+    <button class="sp" onclick="step('s1',2,this)">Real vs Nominal</button>
+    <button class="sp" onclick="step('s1',3,this)">GDP limitations</button>
+  </div>
+
+  <div class="step-panel active" id="s1p0">
+    <div class="card"><div class="card-title">GDP — the economy's scorecard</div><div class="card-body">GDP (Gross Domestic Product) = the total value of everything produced within a country's borders in a year. Think of it as the economy's annual revenue figure.</div></div>
+    <div class="formula">Y = C + I + G + (X − M)</div>
+    <div class="g4">
+      <div class="sc bl"><div class="lbl">C — Consumers</div><div class="val">£1,400bn</div></div>
+      <div class="sc gr"><div class="lbl">I — Investment</div><div class="val">£400bn</div></div>
+      <div class="sc am"><div class="lbl">G — Government</div><div class="val">£500bn</div></div>
+      <div class="sc re"><div class="lbl">X−M — Net exports</div><div class="val">−£100bn</div></div>
+    </div>
+    <div class="verdict eq">Illustrative UK GDP ≈ £2,200bn. Consumer spending is always the largest component — roughly 60%.</div>
+    <div class="g2">
+      <div class="sc"><div class="lbl">GDP</div><div class="val">Output by resources within UK borders (includes foreign-owned factories in the UK)</div></div>
+      <div class="sc bl"><div class="lbl">GNP</div><div class="val">Income earned by UK citizens (includes Brits working abroad, excludes foreigners here)</div></div>
+    </div>
+  </div>
+
+  <div class="step-panel" id="s1p1">
+    <div class="card"><div class="card-title">Three ways to measure — same answer, different angles</div><div class="card-body">Imagine a bakery makes 100 loaves. You can measure the economy three ways — and all should give the same total.</div></div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">Output method</div><div class="val">Count every loaf baked across the whole economy. Sum of value added.</div></div>
+      <div class="sc bl"><div class="lbl">Income method</div><div class="val">Add up baker wages + flour supplier profits + landlord rent. All income = all output.</div></div>
+      <div class="sc am"><div class="lbl">Expenditure method</div><div class="val">Add up everything spent on the loaves: households, firms, government, net exports.</div></div>
+    </div>
+    <div class="insight">In reality they rarely match perfectly — ONS averages them to get the "best estimate". The gaps reveal data quality problems (e.g. cash-in-hand economy isn't captured).</div>
+    <div class="card"><div class="card-title">Why "value added" matters in the output method</div><div class="card-body">A wheat farmer sells grain to a miller for £10. The miller sells flour to a baker for £20. The baker sells bread for £30. GDP = £30 (not £60) — we only count the final value to avoid double counting.</div></div>
+  </div>
+
+  <div class="step-panel" id="s1p2">
+    <div class="card"><div class="card-title">Real vs Nominal — the inflation trap</div><div class="card-body">If GDP rises from £2,000bn to £2,200bn, is the economy really 10% richer? Not if prices rose 10% — you're just paying more for the same stuff.</div></div>
+    <div class="g3">
+      <div class="sc am"><div class="lbl">Nominal GDP (Year 1)</div><div class="val">£2,000bn at Year 1 prices</div></div>
+      <div class="sc am"><div class="lbl">Nominal GDP (Year 2)</div><div class="val">£2,200bn at Year 2 prices</div></div>
+      <div class="sc gr"><div class="lbl">Real GDP (Year 2)</div><div class="val">£2,050bn — after stripping out 7% inflation</div></div>
+    </div>
+    <div class="verdict eq">Real GDP growth = 2.5%. Not 10%. The GDP deflator removed inflation from the comparison.</div>
+    <div class="insight">This is why all official growth statistics are "real" figures. When politicians quote GDP growth, inflation has already been removed. Always ask: nominal or real?</div>
+    <div class="card"><div class="card-title">Practical implication</div><div class="card-body">Your company revenue grew 8% last year. Inflation was 6%. Your real sales growth was only 2%. Macro thinking helps you understand your true performance.</div></div>
+  </div>
+
+  <div class="step-panel" id="s1p3">
+    <div class="card"><div class="card-title">Why GDP isn't a measure of wellbeing</div><div class="card-body">GDP goes up when you get divorced (legal fees), when there's a car crash (repairs, hospital), and when people work longer hours. It misses everything unpaid or illegal.</div></div>
+    <div class="g2">
+      <div class="sc re"><div class="lbl">GDP ignores</div><div class="val">Volunteering, childcare, inequality, environmental damage, happiness, leisure time</div></div>
+      <div class="sc gr"><div class="lbl">GDP includes</div><div class="val">War spending, cigarette sales, gambling — all raise GDP</div></div>
+    </div>
+    <div class="insight">Example: Norway and Qatar both have high GDP per capita. But Norway consistently ranks top for wellbeing; Qatar has very high inequality and poor labour rights. Same number, very different reality.</div>
+    <div class="card"><div class="card-title">Leading, lagging and coincident indicators</div><div class="card-body">Economists watch other signals too. House-building starts (leading — warns of changes 12+ months ahead). Car sales (leading — months ahead). Retail sales (coincident — tells you now). Unemployment (lagging — tells you after it happened).</div></div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s1')">← Back</button><button onclick="nextStep('s1',4)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 3 ══ -->
+<div class="session" id="s2">
+  <div class="s-head">
+    <div class="s-tag">Session 3</div>
+    <div class="s-title">Modelling the Economy</div>
+    <div class="s-desc">The circular flow of income — how the five sectors interact, and why leakages and injections determine national income.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s2',0,this)">The circular flow</button>
+    <button class="sp" onclick="step('s2',1,this)">Leakages & injections</button>
+    <button class="sp" onclick="step('s2',2,this)">Equilibrium condition</button>
+    <button class="sp" onclick="step('s2',3,this)">The multiplier</button>
+  </div>
+
+  <div class="step-panel active" id="s2p0">
+    <div class="card"><div class="card-title">The economy as a water circuit</div><div class="card-body">Imagine money flowing around a pipe system. Households earn wages, spend on goods. Firms receive revenue, pay wages. Money keeps circulating — that's the circular flow of income.</div></div>
+    <div class="hgrid">
+      <div class="hi" style="background:var(--blue-bg);border-color:var(--blue-b);color:var(--blue)">Households<br><small style="font-weight:400">Earn & spend</small></div>
+      <div class="hi" style="background:var(--green-bg);border-color:var(--green-b);color:var(--green)">Firms<br><small style="font-weight:400">Produce & hire</small></div>
+      <div class="hi" style="background:var(--amber-bg);border-color:var(--amber-b);color:var(--amber)">Financial sector<br><small style="font-weight:400">Save & lend</small></div>
+      <div class="hi" style="background:var(--purple-bg);border-color:var(--purple-b);color:var(--purple)">Government<br><small style="font-weight:400">Tax & spend</small></div>
+      <div class="hi" style="background:var(--red-bg);border-color:var(--red-b);color:var(--red)">Foreign sector<br><small style="font-weight:400">Import & export</small></div>
+      <div class="hi" style="background:var(--navy);color:var(--gold-light)">= Real GDP<br><small style="font-weight:400;color:rgba(255,255,255,.6)">The total flow</small></div>
+    </div>
+    <div class="insight">Each sector plays a role. Remove any one and the model breaks. A bank crisis (financial sector) doesn't just hurt banks — it chokes the entire flow.</div>
+  </div>
+
+  <div class="step-panel" id="s2p1">
+    <div class="card"><div class="card-title">Leakages drain the flow; injections refill it</div><div class="card-body">Not all income goes back into the domestic economy. Some leaks out. But money also flows in from outside the household sector.</div></div>
+    <div class="g2">
+      <div class="sc re"><div class="lbl">Leakages (money out)</div><div class="val">Savings — put in bank, not spent<br>Taxes — taken by government<br>Imports — spent on foreign goods</div></div>
+      <div class="sc gr"><div class="lbl">Injections (money in)</div><div class="val">Investment — firms building factories<br>Government spending — NHS, roads<br>Exports — foreigners buying UK goods</div></div>
+    </div>
+    <div class="card"><div class="card-title">Illustrated: a £100 wage in "Britannia"</div><div class="card-body">You earn £100. You pay £20 tax. Save £10. Spend £10 on imported wine. Only £60 circulates back into the domestic economy. That £60 becomes someone else's income, and the leakage process repeats.</div></div>
+    <div class="g4">
+      <div class="sc am"><div class="lbl">Income</div><div class="val">£100</div></div>
+      <div class="sc re"><div class="lbl">Tax (leak)</div><div class="val">−£20</div></div>
+      <div class="sc re"><div class="lbl">Savings (leak)</div><div class="val">−£10</div></div>
+      <div class="sc re"><div class="lbl">Imports (leak)</div><div class="val">−£10</div></div>
+    </div>
+    <div class="verdict eq">Recirculated domestic spending = £60 (60% of the original wage)</div>
+  </div>
+
+  <div class="step-panel" id="s2p2">
+    <div class="card"><div class="card-title">Equilibrium: leakages = injections</div><div class="card-body">The economy is in equilibrium (stable, no tendency to change) when the total money draining out equals the total money flowing in.</div></div>
+    <div class="formula">S + T + M = I + G + X</div>
+    <div class="g3">
+      <div class="sc am"><div class="lbl">Leakages = £300bn</div><div class="val">Savings £100bn + Tax £120bn + Imports £80bn</div></div>
+      <div class="sc gr"><div class="lbl">Injections = £300bn</div><div class="val">Investment £80bn + G £140bn + Exports £80bn</div></div>
+      <div class="sc bl"><div class="lbl">Result</div><div class="val">Equilibrium. Economy stable. No pressure to grow or shrink.</div></div>
+    </div>
+    <div class="verdict un">If injections £320bn > leakages £300bn → economy grows. If leakages £320bn > injections £300bn → economy shrinks.</div>
+    <div class="insight">This is why export booms stimulate growth and why tax rises can trigger recessions. Both change the leakage/injection balance.</div>
+  </div>
+
+  <div class="step-panel" id="s2p3">
+    <div class="card"><div class="card-title">The multiplier — a boulder in a pond</div><div class="card-body">An initial injection doesn't just raise income by its own amount. It ripples through the economy, each round of spending generating more income.</div></div>
+    <div class="card"><div class="card-title">Example: Government builds a £1bn hospital</div><div class="card-body">Construction workers earn £1bn. They spend 80% (save 20%). That £800m goes to retailers, who spend 80% of that (£640m)... and so on. Each round is smaller because of the savings leakage.</div></div>
+    <div class="g4">
+      <div class="sc gr"><div class="lbl">Round 1</div><div class="val">£1,000m</div></div>
+      <div class="sc gr"><div class="lbl">Round 2</div><div class="val">£800m</div></div>
+      <div class="sc gr"><div class="lbl">Round 3</div><div class="val">£640m</div></div>
+      <div class="sc gr"><div class="lbl">Total effect</div><div class="val">£5,000m !</div></div>
+    </div>
+    <div class="formula">Multiplier = 1 ÷ MPS = 1 ÷ 0.20 = 5</div>
+    <div class="insight">With only savings as a leakage (MPS=20%), a £1bn injection generates £5bn of total national income. In reality there are three leakages (tax and imports too), making the real multiplier much smaller — typically 1.2 to 2.</div>
+
+    <!-- INTERACTIVE MULTIPLIER -->
+    <div class="calc-wrap">
+      <div class="card-title" style="margin-bottom:12px">Interactive multiplier calculator</div>
+      <div class="calc-row">
+        <span class="calc-label">Savings rate (MPS)</span>
+        <input type="range" min="5" max="40" value="20" step="5" oninput="calcMult()" id="mps">
+        <span class="calc-val" id="mps-v">20%</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Tax rate (MRT)</span>
+        <input type="range" min="5" max="40" value="20" step="5" oninput="calcMult()" id="mrt">
+        <span class="calc-val" id="mrt-v">20%</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Import rate (MPM)</span>
+        <input type="range" min="5" max="30" value="10" step="5" oninput="calcMult()" id="mpm">
+        <span class="calc-val" id="mpm-v">10%</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Initial injection (£bn)</span>
+        <input type="range" min="1" max="20" value="5" step="1" oninput="calcMult()" id="inj">
+        <span class="calc-val" id="inj-v">£5bn</span>
+      </div>
+      <div class="calc-result">
+        <div class="sub">Multiplier</div>
+        <div class="big" id="mult-out">2.0×</div>
+        <div class="sub">Total GDP impact: <span id="gdp-out">£10bn</span></div>
       </div>
     </div>
   </div>
+  <div class="snav"><button onclick="prevStep('s2')">← Back</button><button onclick="nextStep('s2',4)">Next →</button></div>
+</div>
 
-  <!-- 2 -->
-  <div class="concept-panel" id="cp-gdp">
-    <div class="card">
-      <div class="card-title">Measuring economic activity — GDP</div>
-      <div class="card-body">GDP is the value of all output produced by resources in the domestic economy. Three methods measure it — and all three should give the same answer.</div>
-    </div>
-    <div class="grid-3">
-      <div class="stat-card blue"><div class="lbl">Output method</div><div class="val">Sum of all goods & services produced (Y)</div></div>
-      <div class="stat-card blue"><div class="lbl">Income method</div><div class="val">Sum of wages, profits, rent, dividends</div></div>
-      <div class="stat-card blue"><div class="lbl">Expenditure method</div><div class="val">Sum of all spending in the economy</div></div>
-    </div>
-    <div class="formula">Y = C + I + G + (X − M)</div>
-    <div class="grid-4">
-      <div class="stat-card"><div class="lbl">C</div><div class="val">Consumer spending</div></div>
-      <div class="stat-card"><div class="lbl">I</div><div class="val">Investment by firms</div></div>
-      <div class="stat-card"><div class="lbl">G</div><div class="val">Government spending</div></div>
-      <div class="stat-card"><div class="lbl">X − M</div><div class="val">Net exports</div></div>
-    </div>
-    <div class="insight"><strong>GDP vs GNP:</strong> GDP = output within borders. GNP = GDP + net income earned by residents abroad.<br><br><strong>Real vs Nominal:</strong> Always strip out inflation. Real GDP growth is what actually matters — higher prices don't mean more output.</div>
+<!-- ═══════════════════════════════════════════════ SESSION 4 ══ -->
+<div class="session" id="s3">
+  <div class="s-head">
+    <div class="s-tag">Session 4</div>
+    <div class="s-title">Determination of Economic Activity</div>
+    <div class="s-desc">Aggregate planned expenditure, the 45° diagram, and inflationary/deflationary gaps — explained through a coffee town.</div>
   </div>
-
-  <!-- 3 -->
-  <div class="concept-panel" id="cp-circular">
-    <div class="card">
-      <div class="card-title">The circular flow of income</div>
-      <div class="card-body">The economy runs in a loop. Households supply labour to firms; firms pay wages; households spend on goods; the cycle continues. Five sectors make up the full model.</div>
-    </div>
-    <div class="hex-grid">
-      <div class="hex-item">Household sector</div>
-      <div class="hex-item">Firm sector</div>
-      <div class="hex-item">Financial sector</div>
-      <div class="hex-item">Government sector</div>
-      <div class="hex-item">Foreign sector</div>
-      <div class="hex-item" style="background:var(--blue-bg);border-color:#b0c8e8;color:var(--blue);">= Real GDP</div>
-    </div>
-    <div class="grid-2">
-      <div class="stat-card red"><div class="lbl">Leakages (drain the loop)</div><div class="val">Savings · Taxes · Imports</div></div>
-      <div class="stat-card green"><div class="lbl">Injections (boost the loop)</div><div class="val">Investment · Govt spending · Exports</div></div>
-    </div>
-    <div class="formula">Equilibrium: Leakages = Injections</div>
-    <div class="insight">When injections exceed leakages, the economy grows. When leakages exceed injections, it contracts. This is the engine behind the multiplier effect.</div>
-  </div>
-
-  <!-- 4 -->
-  <div class="concept-panel" id="cp-adas">
-    <div class="card">
-      <div class="card-title">Aggregate Demand & Aggregate Supply</div>
-      <div class="card-body">The AD/AS model is the workhorse of macroeconomics. It shows how the price level and real GDP are determined — and what happens when they're out of balance.</div>
-    </div>
-    <div class="grid-2">
-      <div class="stat-card red"><div class="lbl">Aggregate Demand (AD)</div><div class="val">Total spending at each price level. Downward sloping — higher prices reduce real purchasing power.</div></div>
-      <div class="stat-card green"><div class="lbl">Aggregate Supply (AS)</div><div class="val">Total output firms produce. Upward sloping short-run; vertical at full employment long-run.</div></div>
-    </div>
-    <div class="formula">AD = C + I + G + (X − M)</div>
-    <div class="grid-2">
-      <div class="stat-card amber"><div class="lbl">Inflationary gap</div><div class="val">AD exceeds full employment output → prices rise</div></div>
-      <div class="stat-card blue"><div class="lbl">Deflationary gap</div><div class="val">AD falls short of full employment → unemployment rises</div></div>
-    </div>
-    <div class="insight">Equilibrium is where AD = AS. Policy aims to keep the economy at that point — which is why fiscal and monetary tools exist.</div>
-  </div>
-
-  <!-- 5 -->
-  <div class="concept-panel" id="cp-objectives">
-    <div class="card">
-      <div class="card-title">Macroeconomic policy objectives — the "Magic Hexagon"</div>
-      <div class="card-body">Governments pursue several goals simultaneously — often in tension with each other.</div>
-    </div>
-    <div class="hex-grid">
-      <div class="hex-item">High, sustained economic growth</div>
-      <div class="hex-item">Full employment of resources</div>
-      <div class="hex-item">Low & stable inflation</div>
-      <div class="hex-item">Sustainable balance of payments</div>
-      <div class="hex-item">Stable exchange rate</div>
-      <div class="hex-item">Within environmental limits</div>
-    </div>
-    <div class="divider"></div>
-    <div class="grid-3">
-      <div class="stat-card"><div class="lbl">Policy target</div><div class="val">Quantifiable aim — e.g. 2% inflation</div></div>
-      <div class="stat-card"><div class="lbl">Policy instrument</div><div class="val">The lever used — e.g. interest rates</div></div>
-      <div class="stat-card"><div class="lbl">Policy goal</div><div class="val">Deeper purpose — e.g. long-term full employment</div></div>
-    </div>
-  </div>
-
-  <!-- 6 -->
-  <div class="concept-panel" id="cp-fiscal">
-    <div class="card">
-      <div class="card-title">Fiscal policy</div>
-      <div class="card-body">Fiscal policy is the use of government spending (G) and taxation (T) to influence aggregate demand. It is the core Keynesian tool for managing the economy.</div>
-    </div>
-    <div class="grid-2">
-      <div class="stat-card green"><div class="lbl">Expansionary</div><div class="val">↑ G or ↓ Tax → shifts AD right → closes deflationary gap</div></div>
-      <div class="stat-card red"><div class="lbl">Contractionary</div><div class="val">↓ G or ↑ Tax → shifts AD left → closes inflationary gap</div></div>
-    </div>
-    <div class="formula">Multiplier = 1 ÷ (savings rate + tax rate + import rate)</div>
-    <div class="insight"><strong>The multiplier:</strong> An initial injection ripples through the economy. A £1bn boost in government spending can raise GDP by a multiple of that amount, depending on how much of each pound is re-spent rather than saved, taxed, or spent on imports.<br><br><strong>Watch out for crowding out</strong> — when government borrowing pushes up interest rates and squeezes out private investment.</div>
-  </div>
-
-  <!-- 7 -->
-  <div class="concept-panel" id="cp-money">
-    <div class="card">
-      <div class="card-title">Money, banking & interest rates</div>
-      <div class="card-body">Keynes identified three reasons people hold money rather than investing it:</div>
-    </div>
-    <div class="grid-3">
-      <div class="stat-card blue"><div class="lbl">Transactions motive</div><div class="val">Need cash for day-to-day purchases</div></div>
-      <div class="stat-card blue"><div class="lbl">Precautionary motive</div><div class="val">Buffer for unexpected needs ("rainy day")</div></div>
-      <div class="stat-card blue"><div class="lbl">Speculative motive</div><div class="val">Hold cash to exploit investment opportunities — sensitive to interest rates</div></div>
-    </div>
-    <div class="divider"></div>
-    <div class="card-body" style="margin-bottom:10px;">The interest rate is the price of money. Higher rates reduce investment and consumer spending, pulling down AD:</div>
-    <div class="flow-row">
-      <div class="flow-box red">↑ Interest rate</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">↓ Investment</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">↓ AD</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box green">↓ Inflation / output</div>
-    </div>
-  </div>
-
-  <!-- 8 -->
-  <div class="concept-panel" id="cp-schools">
-    <div class="card">
-      <div class="card-title">Schools of macroeconomic thought</div>
-      <div class="card-body">Macroeconomic policy has evolved through competing schools of thought, each born from real-world crises.</div>
-    </div>
-    <div class="grid-2">
-      <div class="stat-card"><div class="lbl">Pre-Keynesian / Neo-Classical (pre-1930s)</div><div class="val">Markets self-correct. Minimal government. Trust competitive markets for full employment.</div></div>
-      <div class="stat-card blue"><div class="lbl">Keynesian (1936–1970s)</div><div class="val">Demand management via fiscal policy. Government fills gaps left by private sector.</div></div>
-      <div class="stat-card amber"><div class="lbl">Monetarist (1970s–80s)</div><div class="val">Milton Friedman: control the money supply. Inflation is always a monetary phenomenon.</div></div>
-      <div class="stat-card green"><div class="lbl">Supply-side (1980s–present)</div><div class="val">Grow the economy's productive capacity: deregulation, privatisation, tax incentives.</div></div>
-    </div>
-    <div class="insight">The 2008 financial crisis and COVID-19 reignited Keynesian thinking — and the debate continues today.</div>
-  </div>
-</div><!-- end mod-concepts -->
-
-
-<!-- ══════════════════════════════════════════════ -->
-<!--  MODULE 2: APE & EQUILIBRIUM                   -->
-<!-- ══════════════════════════════════════════════ -->
-<div class="module" id="mod-ape">
-  <h2 class="module-title">Aggregate Planned Expenditure & Equilibrium</h2>
-  <p class="module-desc">The economy reaches equilibrium when what businesses produce (Y) exactly equals what everyone plans to spend (AE). Work through the six steps to see how it works.</p>
-
   <div class="step-pills">
-    <button class="step-pill active" onclick="showStep(0)">1. The setup</button>
-    <button class="step-pill" onclick="showStep(1)">2. Spending > Output</button>
-    <button class="step-pill" onclick="showStep(2)">3. Output > Spending</button>
-    <button class="step-pill" onclick="showStep(3)">4. Equilibrium</button>
-    <button class="step-pill" onclick="showStep(4)">5. Deflationary gap</button>
-    <button class="step-pill" onclick="showStep(5)">6. Inflationary gap</button>
+    <button class="sp active" onclick="step('s3',0,this)">What is AE?</button>
+    <button class="sp" onclick="step('s3',1,this)">Spending > Output</button>
+    <button class="sp" onclick="step('s3',2,this)">Output > Spending</button>
+    <button class="sp" onclick="step('s3',3,this)">Equilibrium</button>
+    <button class="sp" onclick="step('s3',4,this)">Deflationary gap</button>
+    <button class="sp" onclick="step('s3',5,this)">Inflationary gap</button>
   </div>
 
-  <!-- Step 1 -->
-  <div class="step-panel active" id="sp-0">
-    <div class="card">
-      <div class="card-title">Imagine a small economy: "Coffeeton"</div>
-      <div class="card-body">Coffeeton has one product: coffee. Workers earn wages (national income = Y), and those wages get spent on coffee. The government buys coffee for meetings, firms invest in new coffee machines, some coffee is exported, and some income leaks out when residents buy imported biscuits.</div>
-    </div>
-    <div class="card-body" style="margin-bottom:10px;font-size:14px;color:var(--text-muted);">Aggregate Planned Expenditure (AE) is everything everyone intends to spend on domestically produced goods:</div>
+  <div class="step-panel active" id="s3p0">
+    <div class="card"><div class="card-title">Aggregate Planned Expenditure — what everyone intends to spend</div><div class="card-body">AE is the total spending all sectors plan to make on domestically produced goods. It's not what was actually spent — it's the intention.</div></div>
     <div class="formula">AE = C + I + G + (X − M)</div>
-    <div class="grid-4">
-      <div class="stat-card"><div class="lbl">C — Households</div><div class="val">£60bn</div></div>
-      <div class="stat-card"><div class="lbl">I — Firms</div><div class="val">£15bn</div></div>
-      <div class="stat-card"><div class="lbl">G — Government</div><div class="val">£20bn</div></div>
-      <div class="stat-card"><div class="lbl">X−M — Net exports</div><div class="val">£5bn</div></div>
+    <div class="card"><div class="card-title">Setting the scene: "Coffeeton"</div><div class="card-body">A small economy with one product: coffee. Workers earn wages and spend on coffee. The government buys coffee for meetings. Firms invest in new machines. Some coffee is exported; some income leaks out buying imported biscuits.</div></div>
+    <div class="g4">
+      <div class="sc bl"><div class="lbl">C — Households</div><div class="val">£60bn</div></div>
+      <div class="sc gr"><div class="lbl">I — Firms</div><div class="val">£15bn</div></div>
+      <div class="sc am"><div class="lbl">G — Government</div><div class="val">£20bn</div></div>
+      <div class="sc pu"><div class="lbl">X−M — Net exports</div><div class="val">£5bn</div></div>
     </div>
-    <div class="stat-card blue" style="text-align:center;padding:14px;margin-top:4px;"><div class="lbl">Total planned expenditure (AE)</div><div class="val" style="font-size:22px;">£100bn</div></div>
-    <div class="insight">C and M change when income changes — they're <em>endogenous</em>. Investment, G, and X are set independently of income — firms and governments plan these in advance (<em>exogenous</em>). This is why the AE line has a slope less than 1.</div>
+    <div class="verdict eq">Total AE = £100bn. This is what everyone plans to spend.</div>
+    <div class="insight"><strong>Endogenous vs exogenous:</strong> C and M change automatically when income changes (endogenous). I, G and X are planned independently of today's income (exogenous). This is why the AE line has a slope less than 1.</div>
   </div>
 
-  <!-- Step 2 -->
-  <div class="step-panel" id="sp-1">
-    <div class="card">
-      <div class="card-title">What if people plan to spend more than the economy is producing?</div>
-      <div class="card-body">Y = £80bn, but AE = £100bn. People want to spend £100bn worth of coffee, but Coffeeton is only producing £80bn worth. Coffee shops are running out of stock.</div>
+  <div class="step-panel" id="s3p1">
+    <div class="card"><div class="card-title">When AE > Y — shelves run empty</div><div class="card-body">National income Y = £80bn, but people plan to spend £100bn. Coffee shops can't keep up. Stock runs out.</div></div>
+    <div class="g3">
+      <div class="sc am"><div class="lbl">National income (Y)</div><div class="val">£80bn</div></div>
+      <div class="sc bl"><div class="lbl">Planned spending (AE)</div><div class="val">£100bn</div></div>
+      <div class="sc re"><div class="lbl">Gap</div><div class="val">£20bn excess demand</div></div>
     </div>
-    <div class="grid-3">
-      <div class="stat-card amber"><div class="lbl">National income (Y)</div><div class="val">£80bn</div></div>
-      <div class="stat-card blue"><div class="lbl">Planned spending (AE)</div><div class="val">£100bn</div></div>
-      <div class="stat-card red"><div class="lbl">Gap</div><div class="val">AE > Y by £20bn</div></div>
-    </div>
-    <div class="verdict over">AE &gt; Y → Shelves emptying. Firms must respond.</div>
-    <div class="card-body" style="font-size:14px;color:var(--text-muted);margin:10px 0 8px;">Firms respond by hiring more staff and ordering more beans:</div>
+    <div class="verdict ov">AE > Y → Coffee shops run out of stock. Firms must respond.</div>
     <div class="flow-row">
-      <div class="flow-box red">Stock runs low</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">Firms hire more, produce more</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">Wages rise → Y ↑</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box green">Y moves toward equilibrium</div>
+      <div class="fb re">Shelves empty</div><div class="farr">→</div>
+      <div class="fb">Firms hire more, produce more</div><div class="farr">→</div>
+      <div class="fb">Wages rise → Y increases</div><div class="farr">→</div>
+      <div class="fb gr">Y rises toward AE</div>
     </div>
-    <div class="insight">This is Point A on your lecture diagram — above the 45° line. The economy automatically adjusts upward toward equilibrium.</div>
+    <div class="insight">This is Point A on the 45° diagram — above the equilibrium line. The economy self-corrects upward. In the diagram, points above the 45° line mean AE > Y.</div>
   </div>
 
-  <!-- Step 3 -->
-  <div class="step-panel" id="sp-2">
-    <div class="card">
-      <div class="card-title">What if the economy is producing more than people plan to spend?</div>
-      <div class="card-body">Now Y = £120bn but AE = £100bn. Coffeeton is making £120bn worth of coffee but people only want to buy £100bn worth. Coffee is piling up unsold in the back room.</div>
+  <div class="step-panel" id="s3p2">
+    <div class="card"><div class="card-title">When Y > AE — stock piles up</div><div class="card-body">National income Y = £120bn but people only plan to spend £100bn. Coffee is piling up unsold. Firms are producing more than anyone wants.</div></div>
+    <div class="g3">
+      <div class="sc bl"><div class="lbl">National income (Y)</div><div class="val">£120bn</div></div>
+      <div class="sc am"><div class="lbl">Planned spending (AE)</div><div class="val">£100bn</div></div>
+      <div class="sc re"><div class="lbl">Gap</div><div class="val">£20bn excess supply</div></div>
     </div>
-    <div class="grid-3">
-      <div class="stat-card blue"><div class="lbl">National income (Y)</div><div class="val">£120bn</div></div>
-      <div class="stat-card amber"><div class="lbl">Planned spending (AE)</div><div class="val">£100bn</div></div>
-      <div class="stat-card red"><div class="lbl">Gap</div><div class="val">Y > AE by £20bn</div></div>
-    </div>
-    <div class="verdict under">Y &gt; AE → Unsold stock accumulates. Firms must cut back.</div>
-    <div class="card-body" style="font-size:14px;color:var(--text-muted);margin:10px 0 8px;">Firms react by cutting production:</div>
+    <div class="verdict un">Y > AE → Unsold stock accumulates. This counts as unplanned investment.</div>
     <div class="flow-row">
-      <div class="flow-box amber">Stock builds up</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">Firms cut hours, lay off staff</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">Wages fall → Y ↓</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box green">Y moves toward equilibrium</div>
+      <div class="fb am">Stock builds up</div><div class="farr">→</div>
+      <div class="fb">Firms cut hours, lay off staff</div><div class="farr">→</div>
+      <div class="fb">Wages fall → Y decreases</div><div class="farr">→</div>
+      <div class="fb gr">Y falls toward AE</div>
     </div>
-    <div class="insight">This is Point B on your lecture diagram — below the 45° line. The economy automatically adjusts downward.</div>
+    <div class="insight">This is Point B on the diagram — below the 45° line. The economy self-corrects downward. The key signal is unplanned stock build-up (firms producing what nobody buys).</div>
   </div>
 
-  <!-- Step 4 -->
-  <div class="step-panel" id="sp-3">
-    <div class="card">
-      <div class="card-title">Equilibrium: Y = AE</div>
-      <div class="card-body">Equilibrium is where national income exactly equals planned spending. Coffeeton produces £100bn and people plan to spend exactly £100bn. No unsold stock, no empty shelves. There is no pressure to change.</div>
+  <div class="step-panel" id="s3p3">
+    <div class="card"><div class="card-title">Equilibrium: Y = AE — the sweet spot</div><div class="card-body">Coffeeton produces exactly £100bn and people plan to spend exactly £100bn. No empty shelves. No unsold stock. No pressure to change.</div></div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">National income (Y)</div><div class="val">£100bn</div></div>
+      <div class="sc gr"><div class="lbl">Planned spending (AE)</div><div class="val">£100bn</div></div>
+      <div class="sc gr"><div class="lbl">Gap</div><div class="val">Zero ✓</div></div>
     </div>
-    <div class="grid-3">
-      <div class="stat-card green"><div class="lbl">National income (Y)</div><div class="val">£100bn</div></div>
-      <div class="stat-card green"><div class="lbl">Planned spending (AE)</div><div class="val">£100bn</div></div>
-      <div class="stat-card green"><div class="lbl">Gap</div><div class="val">Zero ✓</div></div>
-    </div>
-    <div class="verdict eq">Y = AE → Equilibrium. The economy is stable at Ye.</div>
-    <div class="divider"></div>
-    <div class="card">
-      <div class="card-title">The 45° line explained simply</div>
-      <div class="card-body">It's just all the points where Y = AE drawn on a graph. Draw a square — the diagonal is the 45° line. The AE schedule crosses it at exactly one point: equilibrium (Ye).</div>
-    </div>
-    <div class="insight">Important: equilibrium doesn't mean the economy is doing well — it just means it's stable. You can have a stable equilibrium with high unemployment. That's exactly where policy comes in.</div>
+    <div class="verdict eq">Y = AE → Equilibrium at Ye. Stable — but not necessarily good.</div>
+    <div class="card"><div class="card-title">The 45° line demystified</div><div class="card-body">The 45° line is every point where Y = AE drawn on a graph. It's not a target — it's just geometry. The AE schedule crosses it at exactly one point. That's Ye. Simple as that.</div></div>
+    <div class="insight"><strong>Critical insight:</strong> Equilibrium just means stable. An economy can be in equilibrium with 15% unemployment. That's why policy exists — to shift the equilibrium to a better place.</div>
   </div>
 
-  <!-- Step 5 -->
-  <div class="step-panel" id="sp-4">
-    <div class="card">
-      <div class="card-title">Deflationary gap — equilibrium is too low</div>
-      <div class="card-body">Coffeeton settles at equilibrium Y = £80bn — but its factories could produce £100bn at full employment. £20bn of capacity is idle. Workers are unemployed. The economy is stable, but stuck below its potential.</div>
+  <div class="step-panel" id="s3p4">
+    <div class="card"><div class="card-title">Deflationary gap — stuck below potential</div><div class="card-body">Coffeeton's factories could produce £100bn at full employment. But equilibrium only reaches £80bn. £20bn of capacity — workers, machines, buildings — sits idle.</div></div>
+    <div class="g3">
+      <div class="sc"><div class="lbl">Current equilibrium (Ye)</div><div class="val">£80bn</div></div>
+      <div class="sc bl"><div class="lbl">Full employment potential (Yfe)</div><div class="val">£100bn</div></div>
+      <div class="sc re"><div class="lbl">Deflationary gap</div><div class="val">£20bn shortfall in demand</div></div>
     </div>
-    <div class="grid-3">
-      <div class="stat-card"><div class="lbl">Current equilibrium (Ye)</div><div class="val">£80bn</div></div>
-      <div class="stat-card blue"><div class="lbl">Full employment (Yfe)</div><div class="val">£100bn</div></div>
-      <div class="stat-card red"><div class="lbl">Deflationary gap</div><div class="val">£20bn shortfall</div></div>
-    </div>
-    <div class="verdict under">AE needs to rise by £20bn to reach full employment output.</div>
-    <div class="gap-bar-wrap">
-      <div class="gap-bar-label">Economy operating at 80% of potential</div>
-      <div class="gap-bar-track"><div class="gap-bar-fill" style="width:80%;background:#c47a00;"></div></div>
-      <div class="gap-bar-label">Gap: 20% of capacity sitting unused</div>
-      <div class="gap-bar-track"><div class="gap-bar-fill" style="width:20%;background:var(--red);"></div></div>
-    </div>
-    <div class="card-body" style="font-size:14px;color:var(--text-muted);margin-bottom:8px;"><strong style="color:var(--text);">The fix:</strong> Government boosts spending (G ↑) or cuts taxes (C ↑). AE shifts up until it crosses the 45° line at Yfe.</div>
+    <div class="verdict un">AE needs to rise by £20bn to restore full employment.</div>
+    <div class="gb-lbl">Economy at 80% of capacity — 20% wasted</div>
+    <div class="gb-track"><div class="gb-fill" style="width:80%;background:var(--amber)"></div></div>
     <div class="flow-row">
-      <div class="flow-box red">Deflationary gap</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box blue">↑ G or ↓ Tax</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">AE shifts up</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box green">Ye rises to Yfe</div>
+      <div class="fb re">Deflationary gap</div><div class="farr">→</div>
+      <div class="fb bl">↑ G spending or ↓ Tax</div><div class="farr">→</div>
+      <div class="fb">AE line shifts up</div><div class="farr">→</div>
+      <div class="fb gr">New Ye = Yfe</div>
     </div>
-    <div class="insight"><strong>Real-world example:</strong> The UK furlough scheme during COVID-19 was designed to prevent the deflationary gap deepening — by keeping household income (C) from collapsing.</div>
+    <div class="insight"><strong>Real example:</strong> UK furlough scheme (2020) was textbook Keynesian gap-closing policy — the government replaced lost household income (C) to stop the deflationary gap from deepening into a depression.</div>
   </div>
 
-  <!-- Step 6 -->
-  <div class="step-panel" id="sp-5">
-    <div class="card">
-      <div class="card-title">Inflationary gap — spending exceeds capacity</div>
-      <div class="card-body">Confidence is high, everyone is spending freely. Planned spending pushes the implied equilibrium to £120bn — but Coffeeton's factories can only produce £100bn. The economy can't physically produce more. So what happens? Prices rise instead.</div>
+  <div class="step-panel" id="s3p5">
+    <div class="card"><div class="card-title">Inflationary gap — demand exceeds capacity</div><div class="card-body">Everyone is spending freely. AE pushes the implied equilibrium to £120bn. But factories can only produce £100bn. The economy can't make more — so prices rise instead.</div></div>
+    <div class="g3">
+      <div class="sc bl"><div class="lbl">Full employment (Yfe)</div><div class="val">£100bn</div></div>
+      <div class="sc am"><div class="lbl">Implied equilibrium</div><div class="val">£120bn</div></div>
+      <div class="sc re"><div class="lbl">Inflationary gap</div><div class="val">£20bn excess demand</div></div>
     </div>
-    <div class="grid-3">
-      <div class="stat-card blue"><div class="lbl">Full employment (Yfe)</div><div class="val">£100bn</div></div>
-      <div class="stat-card amber"><div class="lbl">Implied equilibrium</div><div class="val">£120bn</div></div>
-      <div class="stat-card red"><div class="lbl">Inflationary gap</div><div class="val">£20bn excess</div></div>
-    </div>
-    <div class="verdict over">AE needs to fall by £20bn to eliminate excess demand and stabilise prices.</div>
-    <div class="gap-bar-wrap">
-      <div class="gap-bar-label">Economy at full capacity (100%)</div>
-      <div class="gap-bar-track"><div class="gap-bar-fill" style="width:100%;background:var(--green);"></div></div>
-      <div class="gap-bar-label">Excess demand pushing into inflation territory</div>
-      <div class="gap-bar-track"><div class="gap-bar-fill" style="width:20%;background:var(--red);"></div></div>
-    </div>
-    <div class="card-body" style="font-size:14px;color:var(--text-muted);margin-bottom:8px;"><strong style="color:var(--text);">The fix:</strong> Government reduces spending or raises taxes to cool demand.</div>
+    <div class="verdict ov">AE must fall by £20bn — otherwise inflation erodes real purchasing power.</div>
     <div class="flow-row">
-      <div class="flow-box red">Inflationary gap</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box amber">↓ G or ↑ Tax</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box">AE shifts down</div>
-      <div class="flow-arr">→</div>
-      <div class="flow-box green">Prices stabilise</div>
+      <div class="fb re">Inflationary gap</div><div class="farr">→</div>
+      <div class="fb am">↓ G or ↑ Tax</div><div class="farr">→</div>
+      <div class="fb">AE line shifts down</div><div class="farr">→</div>
+      <div class="fb gr">Prices stabilise</div>
     </div>
-    <div class="insight"><strong>Real-world example:</strong> The post-pandemic spending surge (2021–22) created exactly this — pent-up demand smashing into limited supply. Central banks raised interest rates sharply to pull AE back down.</div>
+    <div class="insight"><strong>Real example:</strong> Post-pandemic 2021–22. Pent-up demand + supply chain disruption = inflationary gap. Governments raised interest rates to cool AE. UK inflation hit 11% — the gap had been left too wide for too long.</div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s3')">← Back</button><button onclick="nextStep('s3',6)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 5 ══ -->
+<div class="session" id="s4">
+  <div class="s-head">
+    <div class="s-tag">Session 5</div>
+    <div class="s-title">Aggregate Demand & Aggregate Supply</div>
+    <div class="s-desc">The AD/AS model — how price levels and output interact, and what happens when things are out of balance.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s4',0,this)">The AD curve</button>
+    <button class="sp" onclick="step('s4',1,this)">The AS curve</button>
+    <button class="sp" onclick="step('s4',2,this)">Equilibrium</button>
+    <button class="sp" onclick="step('s4',3,this)">Shifts in AD</button>
+    <button class="sp" onclick="step('s4',4,this)">Stagflation</button>
   </div>
 
-  <div class="step-nav-btns">
-    <button onclick="prevStep()">← Back</button>
-    <button onclick="nextStep()">Next →</button>
+  <div class="step-panel active" id="s4p0">
+    <div class="card"><div class="card-title">Aggregate Demand — why it slopes downward</div><div class="card-body">AD = total spending on domestically produced goods at each price level. When prices rise, people buy less. Two mechanisms drive this.</div></div>
+    <div class="formula">AD = C + I + G + (X − M)</div>
+    <div class="g2">
+      <div class="sc re"><div class="lbl">Real money balance effect</div><div class="val">Prices rise → your £1,000 savings buy less → you feel poorer → you spend less</div></div>
+      <div class="sc am"><div class="lbl">Substitution effect</div><div class="val">Prices rise → interest rates rise → borrowing is expensive → investment and consumer durables fall; imports look cheap → exports fall</div></div>
+    </div>
+    <div class="card"><div class="card-title">What shifts the entire AD curve?</div><div class="card-body">When one of the components (C, I, G, X−M) changes independently of the price level, the whole curve shifts. Rightward = more demand at every price. Leftward = less.</div></div>
+    <div class="g2">
+      <div class="sc gr"><div class="lbl">AD shifts right (expansion)</div><div class="val">Tax cut → C rises. Government builds HS2 → G rises. China boom → X rises.</div></div>
+      <div class="sc re"><div class="lbl">AD shifts left (contraction)</div><div class="val">Rate hike → I falls. Austerity → G falls. Recession abroad → X falls.</div></div>
+    </div>
   </div>
-</div><!-- end mod-ape -->
+
+  <div class="step-panel" id="s4p1">
+    <div class="card"><div class="card-title">Aggregate Supply — two very different time horizons</div><div class="card-body">AS = total output firms produce at each price level. The short-run and long-run look completely different.</div></div>
+    <div class="g2">
+      <div class="sc am"><div class="lbl">Short-run AS (upward sloping)</div><div class="val">Higher prices → firms produce more (higher profit margins). Workers haven't renegotiated wages yet.</div></div>
+      <div class="sc bl"><div class="lbl">Long-run AS (vertical)</div><div class="val">At full employment, the economy can't produce more regardless of price. Only real capacity improvements shift this.</div></div>
+    </div>
+    <div class="insight">The short-run AS slope depends on labour market flexibility. If workers immediately demand higher wages when prices rise, AS is nearly vertical. If wages are sticky, AS is flatter and firms can expand output temporarily.</div>
+    <div class="card"><div class="card-title">What shifts AS?</div><div class="card-body">Technology improvements, better infrastructure, education, immigration, energy price changes, business regulation. A new oil discovery shifts LRAS right. A war destroying factories shifts it left.</div></div>
+  </div>
+
+  <div class="step-panel" id="s4p2">
+    <div class="card"><div class="card-title">Macroeconomic equilibrium: AD = AS</div><div class="card-body">The economy settles where AD meets AS. This gives us a specific price level (P*) and real GDP (Y*). If prices are above P*, unsold goods pile up and firms cut prices. Below P*, queues form and prices rise. The market finds P* naturally.</div></div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">At equilibrium (e)</div><div class="val">P* = 100, Y* = £2,000bn. No surplus, no shortage.</div></div>
+      <div class="sc re"><div class="lbl">If P > P*</div><div class="val">Firms over-produce, goods pile up, prices fall back to P*</div></div>
+      <div class="sc am"><div class="lbl">If P < P*</div><div class="val">Queues form, firms raise prices, P rises back to P*</div></div>
+    </div>
+    <div class="verdict eq">The three equilibrium states: Deflationary gap (Y* < Yfe) · Full employment (Y* = Yfe) · Inflationary gap (Y* > Yfe implied)</div>
+  </div>
+
+  <div class="step-panel" id="s4p3">
+    <div class="card"><div class="card-title">What happens when AD shifts right?</div><div class="card-body">Government increases spending by £50bn. The AD curve shifts right. The new equilibrium has higher output AND higher prices. How much of each depends on the AS curve's shape.</div></div>
+    <div class="g3">
+      <div class="sc am"><div class="lbl">Starting point</div><div class="val">P = 100, Y = £1,800bn (below full employment)</div></div>
+      <div class="sc gr"><div class="lbl">After AD shifts right</div><div class="val">P = 104, Y = £1,950bn. More output, slight inflation.</div></div>
+      <div class="sc re"><div class="lbl">At full capacity</div><div class="val">Further AD shifts only cause inflation, not more output</div></div>
+    </div>
+    <div class="insight">This explains why stimulus works during recessions (slack in the economy absorbs more output) but causes inflation during booms (economy is already at capacity). Timing is everything.</div>
+    <div class="card"><div class="card-title">COVID-19 through the AD/AS lens</div><div class="card-body">March 2020: AS crashed (lockdown — factories closed) AND AD crashed (no one could spend). Initial effect: falling output, falling prices. 2021: AD bounced back via furlough. AS recovered slowly. Result: inflationary gap. Central banks raised rates to push AD left.</div></div>
+  </div>
+
+  <div class="step-panel" id="s4p4">
+    <div class="card"><div class="card-title">Stagflation — the nightmare scenario</div><div class="card-body">Normally inflation and unemployment move in opposite directions. Stagflation breaks this rule: high inflation AND high unemployment together. It happened in the 1970s oil crisis.</div></div>
+    <div class="card"><div class="card-title">How stagflation happens: AS shifts left</div><div class="card-body">1973: OPEC quadrupled oil prices overnight. Oil is an input for almost everything. Production costs soared for every firm. The SRAS curve shifted left — same prices but less output. Result: prices rose AND output fell AND unemployment rose. Traditional demand management couldn't fix it (boosting demand just adds more inflation).</div></div>
+    <div class="g3">
+      <div class="sc re"><div class="lbl">Oil shock</div><div class="val">Costs surge → SRAS shifts left</div></div>
+      <div class="sc re"><div class="lbl">Output falls</div><div class="val">GDP ↓, unemployment ↑</div></div>
+      <div class="sc re"><div class="lbl">Prices rise</div><div class="val">Inflation ↑ simultaneously</div></div>
+    </div>
+    <div class="verdict ov">Stagflation: the worst of both worlds. Supply-side solutions (deregulation, competition) become necessary.</div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s4')">← Back</button><button onclick="nextStep('s4',5)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 6 ══ -->
+<div class="session" id="s5">
+  <div class="s-head">
+    <div class="s-tag">Session 6</div>
+    <div class="s-title">Managing the Economy — An Overview</div>
+    <div class="s-desc">Targets, instruments and goals — the full toolkit governments use to steer the economy, and the trade-offs they face.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s5',0,this)">Targets vs Goals</button>
+    <button class="sp" onclick="step('s5',1,this)">Policy toolkit</button>
+    <button class="sp" onclick="step('s5',2,this)">Trade-offs</button>
+    <button class="sp" onclick="step('s5',3,this)">The barrel model</button>
+  </div>
+
+  <div class="step-panel active" id="s5p0">
+    <div class="card"><div class="card-title">Three levels of policy intent</div><div class="card-body">Governments operate at three levels simultaneously. Confusing them leads to bad analysis and bad headlines.</div></div>
+    <div class="g3">
+      <div class="sc bl"><div class="lbl">Policy Target</div><div class="val">Specific, measurable number. "Inflation below 2%." "Unemployment below 4%."</div></div>
+      <div class="sc am"><div class="lbl">Policy Instrument</div><div class="val">The actual lever pulled. Interest rates. Tax rates. Government spending levels.</div></div>
+      <div class="sc gr"><div class="lbl">Policy Goal</div><div class="val">The deeper purpose. Full employment. Price stability. Sustainable growth. Long-run aspiration.</div></div>
+    </div>
+    <div class="card"><div class="card-title">Example: Bank of England 2022</div><div class="card-body">Goal: long-run price stability. Target: CPI inflation back to 2%. Instrument: raised Bank Rate from 0.1% to 5.25% across 14 consecutive meetings. The instrument (rate) is not the goal (stability) — it's just the lever.</div></div>
+    <div class="insight">Politicians often confuse targets with goals. "Getting debt down" is a target, not a goal. The goal is sustainable growth and full employment. You might need to run deficits to achieve that goal.</div>
+  </div>
+
+  <div class="step-panel" id="s5p1">
+    <div class="card"><div class="card-title">The full policy toolkit</div><div class="card-body">Governments have four main demand-side levers and one supply-side lever.</div></div>
+    <div class="g2">
+      <div class="sc bl"><div class="lbl">Fiscal policy</div><div class="val">Change G or T to shift AD directly. Keynes' favourite. Fast impact on demand, slow on supply.</div></div>
+      <div class="sc gr"><div class="lbl">Monetary policy</div><div class="val">Change interest rates or money supply to influence C and I. Central bank's main tool.</div></div>
+      <div class="sc am"><div class="lbl">Exchange rate policy</div><div class="val">Intervene in currency markets to affect competitiveness of exports and price of imports.</div></div>
+      <div class="sc pu"><div class="lbl">Trade policy</div><div class="val">Tariffs, quotas, subsidies to influence X and M directly. Brexit changed the UK's trade policy fundamentally.</div></div>
+    </div>
+    <div class="sc re" style="margin-top:10px"><div class="lbl">Supply-side policy</div><div class="val">Deregulation, privatisation, education, R&D investment. Shifts LRAS right. Slow but lasting.</div></div>
+  </div>
+
+  <div class="step-panel" id="s5p2">
+    <div class="card"><div class="card-title">The unavoidable trade-offs</div><div class="card-body">Every policy choice involves a trade-off. There is no free lunch in macroeconomics.</div></div>
+    <div class="g2">
+      <div class="sc re"><div class="lbl">Inflation vs Unemployment</div><div class="val">Cut rates to boost jobs → inflation rises. Hike rates to crush inflation → unemployment rises. You can't eliminate both simultaneously.</div></div>
+      <div class="sc am"><div class="lbl">Growth vs Environment</div><div class="val">Faster growth usually means more emissions, more resource use. The "green transition" is expensive short-term.</div></div>
+      <div class="sc bl"><div class="lbl">Trade balance vs Growth</div><div class="val">Growing fast sucks in imports. A trade deficit worsens. Fixing the deficit requires slower growth or a currency devaluation.</div></div>
+      <div class="sc pu"><div class="lbl">Equality vs Efficiency</div><div class="val">Redistribution via taxes reduces incentives. But extreme inequality reduces consumption and social stability.</div></div>
+    </div>
+    <div class="insight">The "Magic Hexagon" exists because ALL six objectives cannot be fully achieved at once. Policy is always about choosing which trade-off to accept this year.</div>
+  </div>
+
+  <div class="step-panel" id="s5p3">
+    <div class="card"><div class="card-title">The barrel model — visualising capacity</div><div class="card-body">Think of the economy as a barrel. The barrel's size = productive capacity (LRAS). The water level = actual output (real GDP). The taps = injections. The holes = leakages.</div></div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">Full barrel</div><div class="val">Economy at full capacity. Any more water (demand) just overflows as inflation.</div></div>
+      <div class="sc am"><div class="lbl">Half full</div><div class="val">Economy below capacity. Unemployment. Deflationary gap. Open the taps (fiscal/monetary stimulus).</div></div>
+      <div class="sc bl"><div class="lbl">Growing barrel</div><div class="val">Supply-side policies grow the barrel. More capacity = higher potential output without inflation.</div></div>
+    </div>
+    <div class="verdict eq">Demand-side policy fills the barrel. Supply-side policy makes the barrel bigger. Both matter — but work on different timescales.</div>
+    <div class="insight">UK productivity puzzle: the barrel hasn't grown much since 2008. Supply-side reforms (infrastructure, skills, R&D) are needed to grow potential output — not just filling the barrel with more demand.</div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s5')">← Back</button><button onclick="nextStep('s5',4)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 7 ══ -->
+<div class="session" id="s6">
+  <div class="s-head">
+    <div class="s-tag">Session 7</div>
+    <div class="s-title">Fiscal Policy & Government Finances</div>
+    <div class="s-desc">How governments use spending and taxation to manage the economy — the multiplier, crowding out, and the limits of fiscal policy.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s6',0,this)">Fiscal tools</button>
+    <button class="sp" onclick="step('s6',1,this)">Closing the gaps</button>
+    <button class="sp" onclick="step('s6',2,this)">Crowding out</button>
+    <button class="sp" onclick="step('s6',3,this)">Fiscal limits</button>
+    <button class="sp" onclick="step('s6',4,this)">Interactive sim</button>
+  </div>
+
+  <div class="step-panel active" id="s6p0">
+    <div class="card"><div class="card-title">The two fiscal levers: G and T</div><div class="card-body">Fiscal policy is simple in theory: if the economy is too cold, spend more or tax less. If it's too hot, spend less or tax more. In practice, the politics are brutal.</div></div>
+    <div class="g2">
+      <div class="sc gr"><div class="lbl">Government spending (G)</div><div class="val">NHS pay rises, road building, furlough, Universal Credit. Direct injection into AD.</div></div>
+      <div class="sc am"><div class="lbl">Taxation (T)</div><div class="val">Income tax, VAT, corporation tax, National Insurance. Changes household disposable income → affects C.</div></div>
+    </div>
+    <div class="card"><div class="card-title">Direct vs indirect taxes</div><div class="card-body">Direct taxes (income tax, corporation tax) affect the MPC — steeper AE slope. Indirect taxes (VAT) affect prices directly. The mechanics differ but both pull on the same lever: aggregate demand.</div></div>
+    <div class="formula">Budget balance = Tax revenue (T) − Government spending (G)</div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">Surplus (T > G)</div><div class="val">Government takes more out than it puts in. Contractionary.</div></div>
+      <div class="sc am"><div class="lbl">Balanced</div><div class="val">T = G. Neutral stance.</div></div>
+      <div class="sc re"><div class="lbl">Deficit (G > T)</div><div class="val">Government puts more in than it takes out. Expansionary. Adds to national debt.</div></div>
+    </div>
+  </div>
+
+  <div class="step-panel" id="s6p1">
+    <div class="card"><div class="card-title">Closing a deflationary gap: Keynesian stimulus</div><div class="card-body">Economy stuck at £1,600bn, full employment potential is £2,000bn. Gap = £400bn. But thanks to the multiplier, government doesn't need to spend £400bn to close it.</div></div>
+    <div class="g3">
+      <div class="sc am"><div class="lbl">Deflationary gap</div><div class="val">£400bn — economy running below potential</div></div>
+      <div class="sc bl"><div class="lbl">Multiplier = 2</div><div class="val">1 ÷ (MPS 0.2 + MRT 0.2 + MPM 0.1) = 2</div></div>
+      <div class="sc gr"><div class="lbl">Government only needs to spend</div><div class="val">£200bn (multiplier does the rest)</div></div>
+    </div>
+    <div class="verdict eq">£200bn extra G × multiplier of 2 = £400bn extra GDP. Gap closed.</div>
+    <div class="card"><div class="card-title">Closing an inflationary gap: contractionary policy</div><div class="card-body">Economy overheating — inflation rising. Government raises taxes by £100bn (reducing household disposable income → C falls). Multiplier works in reverse. AD shifts left. Inflation cools. But growth slows too.</div></div>
+    <div class="verdict ov">↑ Tax £100bn × multiplier 2 = −£200bn fall in GDP. Inflationary gap reduced but growth sacrificed.</div>
+  </div>
+
+  <div class="step-panel" id="s6p2">
+    <div class="card"><div class="card-title">Crowding out — the hidden cost of borrowing</div><div class="card-body">When the government borrows to fund a deficit, it competes with private firms for funds in financial markets. This pushes interest rates up — and private investment drops.</div></div>
+    <div class="flow-row">
+      <div class="fb bl">↑ G (deficit financed)</div><div class="farr">→</div>
+      <div class="fb">↑ Borrowing demand</div><div class="farr">→</div>
+      <div class="fb am">↑ Interest rates</div><div class="farr">→</div>
+      <div class="fb re">↓ Private investment I</div><div class="farr">→</div>
+      <div class="fb">AD boost partly offset</div>
+    </div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">AE₁ → AE₂</div><div class="val">Government spends: AE shifts up, income rises from Y₁ to Y₂</div></div>
+      <div class="sc re"><div class="lbl">AE₂ → AE₃</div><div class="val">Higher rates choke private investment: AE partly falls back</div></div>
+      <div class="sc am"><div class="lbl">Net effect</div><div class="val">Y₃ (less than Y₂). Fiscal policy is less powerful than it looks.</div></div>
+    </div>
+    <div class="insight"><strong>The monetarist critique:</strong> If crowding out is complete, government spending just replaces private spending pound for pound. Net GDP effect = zero. Keynesians argue crowding out is only partial. The debate continues.</div>
+  </div>
+
+  <div class="step-panel" id="s6p3">
+    <div class="card"><div class="card-title">Why fiscal policy is harder than it looks</div><div class="card-body">Four real limitations mean fiscal fine-tuning often misses:</div></div>
+    <div class="g2">
+      <div class="sc re"><div class="lbl">Time lags</div><div class="val">Diagnosing the problem: 6 months. Parliament approving spending: 6–12 months. Multiplier feeding through: 12–18 months. Total: 2+ years. Economy may have changed by then.</div></div>
+      <div class="sc am"><div class="lbl">Uncertainty</div><div class="val">Nobody knows the true multiplier. Nobody knows how close to full employment we are. Models disagree.</div></div>
+      <div class="sc bl"><div class="lbl">Budget deficit concerns</div><div class="val">Running deficits year after year builds national debt. Markets eventually worry about repayment. Interest rates rise independently.</div></div>
+      <div class="sc pu"><div class="lbl">Structural unemployment</div><div class="val">Fiscal stimulus can't retrain a steel worker to be a software engineer. Some unemployment doesn't respond to demand boosts.</div></div>
+    </div>
+    <div class="insight">This is why even Keynesian economists support "automatic stabilisers" (unemployment benefits rise automatically in recessions; taxes fall automatically) — they kick in without political lag.</div>
+  </div>
+
+  <div class="step-panel" id="s6p4">
+    <!-- INTERACTIVE FISCAL SIMULATOR -->
+    <div class="card"><div class="card-title">Interactive fiscal policy simulator</div><div class="card-body">Adjust government spending and tax rates to see the impact on GDP and the budget balance.</div></div>
+    <div class="fiscal-sim">
+      <div class="calc-row">
+        <span class="calc-label">Government spending increase (£bn)</span>
+        <input type="range" min="0" max="200" value="50" step="10" oninput="calcFiscal()" id="fg">
+        <span class="calc-val" id="fg-v">£50bn</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Tax cut (£bn)</span>
+        <input type="range" min="0" max="200" value="0" step="10" oninput="calcFiscal()" id="ft">
+        <span class="calc-val" id="ft-v">£0bn</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Fiscal multiplier</span>
+        <input type="range" min="1" max="3" value="2" step="0.5" oninput="calcFiscal()" id="fm">
+        <span class="calc-val" id="fm-v">2.0×</span>
+      </div>
+      <div class="fs-row">
+        <div class="fs-card" style="background:var(--green-bg);border-color:var(--green-b)">
+          <div class="lbl">GDP boost</div>
+          <div class="val" id="fg-gdp" style="color:var(--green)">£100bn</div>
+        </div>
+        <div class="fs-card" id="fbal-card" style="background:var(--red-bg);border-color:var(--red-b)">
+          <div class="lbl">Budget change</div>
+          <div class="val" id="fg-bal" style="color:var(--red)">−£50bn</div>
+        </div>
+        <div class="fs-card" style="background:var(--blue-bg);border-color:var(--blue-b)">
+          <div class="lbl">Net fiscal stance</div>
+          <div class="val" id="fg-stance" style="color:var(--blue)">Expansionary</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s6')">← Back</button><button onclick="nextStep('s6',5)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 8 ══ -->
+<div class="session" id="s7">
+  <div class="s-head">
+    <div class="s-tag">Session 8</div>
+    <div class="s-title">Money, Banking & Interest Rates</div>
+    <div class="s-desc">What money actually is, why people hold it, how banks create it, and how interest rates transmit through the economy.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s7',0,this)">What is money?</button>
+    <button class="sp" onclick="step('s7',1,this)">Why hold money?</button>
+    <button class="sp" onclick="step('s7',2,this)">How banks create money</button>
+    <button class="sp" onclick="step('s7',3,this)">Interest rates & AD</button>
+  </div>
+
+  <div class="step-panel active" id="s7p0">
+    <div class="card"><div class="card-title">Money — more than just notes and coins</div><div class="card-body">Money is anything widely accepted as payment. It has three functions.</div></div>
+    <div class="g3">
+      <div class="sc bl"><div class="lbl">Medium of exchange</div><div class="val">Avoids the barter problem. You don't need to find a baker who wants your shoes.</div></div>
+      <div class="sc gr"><div class="lbl">Store of value</div><div class="val">Hold it now, spend later. (Inflation erodes this function.)</div></div>
+      <div class="sc am"><div class="lbl">Unit of account</div><div class="val">Price everything in the same unit. Allows rational comparison.</div></div>
+    </div>
+    <div class="card"><div class="card-title">The money supply hierarchy</div><div class="card-body">M0 (narrow money) = physical cash. M4 (broad money) = cash + bank deposits + near-money. Most money in the economy is not physical — it's entries on bank databases.</div></div>
+    <div class="g3">
+      <div class="sc"><div class="lbl">Physical cash in UK</div><div class="val">~£80bn (M0)</div></div>
+      <div class="sc bl"><div class="lbl">Total money supply</div><div class="val">~£2,800bn (M4)</div></div>
+      <div class="sc re"><div class="lbl">Ratio</div><div class="val">97% of money is bank deposits, not physical cash</div></div>
+    </div>
+  </div>
+
+  <div class="step-panel" id="s7p1">
+    <div class="card"><div class="card-title">Keynes's three motives for holding money (liquidity preference)</div><div class="card-body">Why do people hold cash rather than investing it in interest-bearing assets? Keynes identified three separate reasons.</div></div>
+    <div class="g3">
+      <div class="sc bl"><div class="lbl">Transactions motive</div><div class="val">You keep £500 in your current account to pay for groceries, fuel, coffee this week. Independent of interest rates.</div></div>
+      <div class="sc gr"><div class="lbl">Precautionary motive</div><div class="val">You keep £2,000 as an emergency fund. "Rainy day" money. Also independent of interest rates.</div></div>
+      <div class="sc am"><div class="lbl">Speculative motive</div><div class="val">You hold £10,000 in cash waiting for bond prices to fall before buying. Very sensitive to interest rates.</div></div>
+    </div>
+    <div class="insight"><strong>The liquidity trap:</strong> When interest rates fall very low (near zero), the speculative motive dominates. Everyone holds cash expecting rates to rise (and bond prices to fall). No one invests. Monetary policy loses its grip. Japan 1990s, UK/US post-2008.</div>
+    <div class="verdict un">At near-zero rates: people hold cash, not bonds. Extra money supply sits idle. This is why quantitative easing had limited effect on real investment after 2008.</div>
+  </div>
+
+  <div class="step-panel" id="s7p2">
+    <div class="card"><div class="card-title">How banks create money — the credit multiplier</div><div class="card-body">Banks don't just store money — they create it. When you deposit £1,000, the bank keeps a fraction (reserve ratio) and lends the rest.</div></div>
+    <div class="card"><div class="card-title">Example: 10% reserve ratio, £1,000 initial deposit</div><div class="card-body">You deposit £1,000. Bank keeps £100 (10%), lends £900 to someone else. That person deposits £900 in another bank, which keeps £90, lends £810. The £810 gets deposited... and so on.</div></div>
+    <div class="g4">
+      <div class="sc gr"><div class="lbl">Round 1</div><div class="val">£1,000 deposit → £900 lent</div></div>
+      <div class="sc gr"><div class="lbl">Round 2</div><div class="val">£900 deposit → £810 lent</div></div>
+      <div class="sc gr"><div class="lbl">Round 3</div><div class="val">£810 → £729 lent</div></div>
+      <div class="sc bl"><div class="lbl">Total created</div><div class="val">£10,000 (1/reserve ratio)</div></div>
+    </div>
+    <div class="formula">Money multiplier = 1 ÷ reserve ratio = 1 ÷ 0.10 = 10×</div>
+    <div class="insight">The 2008 crisis happened partly because reserve ratios fell dangerously low and banks created far too much credit money — then the music stopped.</div>
+  </div>
+
+  <div class="step-panel" id="s7p3">
+    <div class="card"><div class="card-title">How interest rates ripple through the economy</div><div class="card-body">Bank Rate is the rate the Bank of England charges commercial banks. Everything else follows from this single number.</div></div>
+    <div class="flow-row">
+      <div class="fb re">BoE raises Bank Rate</div><div class="farr">→</div>
+      <div class="fb am">Commercial rates rise</div><div class="farr">→</div>
+      <div class="fb">Mortgage costs up, loans expensive</div><div class="farr">→</div>
+      <div class="fb re">C and I fall</div><div class="farr">→</div>
+      <div class="fb">AD shifts left</div><div class="farr">→</div>
+      <div class="fb gr">Inflation falls</div>
+    </div>
+
+    <!-- RATE EFFECTS SIM -->
+    <div class="rate-sim">
+      <div class="card-title" style="margin-bottom:10px">What does a rate change do to each sector?</div>
+      <div class="calc-row">
+        <span class="calc-label">Interest rate change</span>
+        <input type="range" min="-3" max="3" value="0" step="0.5" oninput="calcRate()" id="rate-sl">
+        <span class="calc-val" id="rate-out">0%</span>
+      </div>
+      <div class="rate-grid" id="rate-grid">
+        <div class="rate-card" id="rc-mortgage"><div class="icon">🏠</div><div class="name">Mortgages</div><div class="effect" id="re-m">→ unchanged</div></div>
+        <div class="rate-card" id="rc-biz"><div class="icon">🏭</div><div class="name">Business investment</div><div class="effect" id="re-b">→ unchanged</div></div>
+        <div class="rate-card" id="rc-save"><div class="icon">💰</div><div class="name">Savings</div><div class="effect" id="re-s">→ unchanged</div></div>
+        <div class="rate-card" id="rc-fx"><div class="icon">💱</div><div class="name">Exchange rate</div><div class="effect" id="re-fx">→ unchanged</div></div>
+        <div class="rate-card" id="rc-ad"><div class="icon">📊</div><div class="name">Overall AD</div><div class="effect" id="re-ad">→ unchanged</div></div>
+        <div class="rate-card" id="rc-inf"><div class="icon">📈</div><div class="name">Inflation</div><div class="effect" id="re-inf">→ unchanged</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s7')">← Back</button><button onclick="nextStep('s7',4)">Next →</button></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SESSION 9 ══ -->
+<div class="session" id="s8">
+  <div class="s-head">
+    <div class="s-tag">Session 9</div>
+    <div class="s-title">Monetary Policy</div>
+    <div class="s-desc">How central banks use interest rates and money supply to control inflation and support growth — and where it fails.</div>
+  </div>
+  <div class="step-pills">
+    <button class="sp active" onclick="step('s8',0,this)">The transmission mechanism</button>
+    <button class="sp" onclick="step('s8',1,this)">Quantity theory of money</button>
+    <button class="sp" onclick="step('s8',2,this)">Quantitative easing</button>
+    <button class="sp" onclick="step('s8',3,this)">Limits of monetary policy</button>
+  </div>
+
+  <div class="step-panel active" id="s8p0">
+    <div class="card"><div class="card-title">How does a rate change actually reach the real economy?</div><div class="card-body">The Bank of England changes one number — Bank Rate. But money must travel through a whole system before it affects your job or your company's investment plans.</div></div>
+    <div class="card"><div class="card-title">The five transmission channels</div><div class="card-body">Each channel works at a different speed and with different strength.</div></div>
+    <div class="g2">
+      <div class="sc bl"><div class="lbl">1. Bank lending channel</div><div class="val">BoE rate → commercial bank rates → mortgage and loan costs change → C and I adjust. Speed: weeks to months.</div></div>
+      <div class="sc gr"><div class="lbl">2. Asset price channel</div><div class="val">Lower rates → bond prices rise → shares rise → people feel wealthier → they spend more (wealth effect). Speed: fast for markets, slower for spending.</div></div>
+      <div class="sc am"><div class="lbl">3. Exchange rate channel</div><div class="val">Higher UK rates → foreign investors buy £ → £ appreciates → exports more expensive → X falls, M rises → AD falls.</div></div>
+      <div class="sc re"><div class="lbl">4. Expectations channel</div><div class="val">If BoE signals rates will stay high, firms and households change behaviour immediately — even before rates move. The most powerful and most unpredictable.</div></div>
+    </div>
+    <div class="insight">Total transmission lag: 18–24 months. This is why central banks must act on future inflation, not current inflation. By the time today's rate rise bites, inflation may have already changed.</div>
+  </div>
+
+  <div class="step-panel" id="s8p1">
+    <div class="card"><div class="card-title">Quantity theory of money — the monetarist foundation</div><div class="card-body">Milton Friedman's insight: "inflation is always and everywhere a monetary phenomenon." Too much money chasing too few goods.</div></div>
+    <div class="formula">MV = PY (Fisher Equation)</div>
+    <div class="g4">
+      <div class="sc bl"><div class="lbl">M</div><div class="val">Money supply</div></div>
+      <div class="sc gr"><div class="lbl">V</div><div class="val">Velocity (how often £1 is spent per year)</div></div>
+      <div class="sc am"><div class="lbl">P</div><div class="val">Price level</div></div>
+      <div class="sc re"><div class="lbl">Y</div><div class="val">Real output (GDP)</div></div>
+    </div>
+    <div class="card"><div class="card-title">Example: the monetarist argument</div><div class="card-body">Assume V and Y are roughly constant short-run. Economy: M = £1,000bn, V = 2, so PY = £2,000bn. Government prints money: M rises to £1,200bn. PY must rise to £2,400bn. If Y can't rise (full employment), P rises by 20%. Result: 20% inflation. Control M, control inflation.</div></div>
+    <div class="verdict un">Monetarist prescription: central bank controls money supply growth. Keep M growing at the same rate as real GDP, and inflation stays at zero. Simple in theory — hard in practice because V is unstable.</div>
+  </div>
+
+  <div class="step-panel" id="s8p2">
+    <div class="card"><div class="card-title">Quantitative Easing — monetary policy's last resort</div><div class="card-body">When Bank Rate hits zero, the conventional lever is gone. QE is the alternative: the central bank creates new money and buys assets (government bonds) from financial institutions.</div></div>
+    <div class="flow-row">
+      <div class="fb bl">BoE creates £100bn</div><div class="farr">→</div>
+      <div class="fb">Buys government bonds from banks</div><div class="farr">→</div>
+      <div class="fb gr">Banks have £100bn cash</div><div class="farr">→</div>
+      <div class="fb">Bond prices ↑, yields ↓</div><div class="farr">→</div>
+      <div class="fb am">All interest rates fall</div><div class="farr">→</div>
+      <div class="fb gr">AD stimulated</div>
+    </div>
+    <div class="g3">
+      <div class="sc gr"><div class="lbl">UK QE (2009–2021)</div><div class="val">BoE created ~£895bn through QE. Prevented a deeper depression post-2008 and post-COVID.</div></div>
+      <div class="sc am"><div class="lbl">The problem</div><div class="val">Extra cash didn't always flow to businesses. Banks held it as reserves. Asset price inflation (house prices, shares) benefited the wealthy disproportionately.</div></div>
+      <div class="sc re"><div class="lbl">Unwinding QE</div><div class="val">2022–23: BoE started selling bonds back (Quantitative Tightening). Process is slow and complex.</div></div>
+    </div>
+    <div class="insight">QE inflated asset prices more than consumer prices — explaining much of the wealth inequality growth since 2008. A £1m house isn't more useful, it's just worth more money because the money supply expanded.</div>
+  </div>
+
+  <div class="step-panel" id="s8p3">
+    <div class="card"><div class="card-title">Where monetary policy fails</div><div class="card-body">Monetary policy is powerful but has real blind spots. Understanding the limits explains why fiscal policy remains necessary.</div></div>
+    <div class="g2">
+      <div class="sc re"><div class="lbl">Liquidity trap</div><div class="val">At near-zero rates, cutting further does nothing. People and banks hoard cash. QE effectiveness falls sharply. Japan: trapped since 1995.</div></div>
+      <div class="sc am"><div class="lbl">Supply-side inflation</div><div class="val">Rate hikes can't fix an oil shock or a supply chain crisis. Raising rates to kill cost-push inflation also kills output. Stagflation trap.</div></div>
+      <div class="sc bl"><div class="lbl">Long lags</div><div class="val">18–24 months for full effect. Risk of over-tightening: raising rates until they bite, then the economy collapses just as rates finally work.</div></div>
+      <div class="sc pu"><div class="lbl">Distribution effects</div><div class="val">Rate rises hurt mortgage holders hardest. Rate cuts help asset owners most. Monetary policy is not distributionally neutral.</div></div>
+    </div>
+    <div class="card"><div class="card-title">Keynesian vs Monetarist: the key disagreement</div><div class="card-body">Keynesians: demand for money is elastic (speculative motive). Rate changes have unpredictable effects on spending. Need fiscal backup. Monetarists: demand for money is inelastic. Rate changes reliably affect AD. Fiscal policy is slow and crowds out private investment. Trust monetary rules.</div></div>
+    <div class="verdict in">The practical consensus: use both. Monetary policy for normal demand management. Fiscal policy for severe downturns when rates hit zero. Supply-side for long-run growth.</div>
+  </div>
+  <div class="snav"><button onclick="prevStep('s8')">← Back</button><button onclick="nextStep('s8',4)">Next →</button></div>
+</div>
 
 </main>
-
-<footer>
-  <strong>Cranfield University · Global Macroeconomics</strong> &nbsp;·&nbsp; Interactive study resource
-</footer>
+<footer><strong>Cranfield University · Global Macroeconomics</strong> &nbsp;·&nbsp; Interactive study resource · Sessions 1–9 · For educational use</footer>
 
 <script>
-  function showModule(id) {
-    document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('mod-' + id).classList.add('active');
-    event.target.classList.add('active');
-  }
+/* ── SESSION SWITCHING ── */
+const sessions=document.querySelectorAll('.session');
+function showSession(i,btn){
+  sessions.forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  sessions[i].classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-  // Concepts
-  function showConcept(id) {
-    document.querySelectorAll('.concept-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.concept-pill').forEach(b => b.classList.remove('active'));
-    document.getElementById('cp-' + id).classList.add('active');
-    event.target.classList.add('active');
+/* ── STEP NAV ── */
+const cursors={};
+function step(sid,n,btn){
+  const panels=document.querySelectorAll('#'+sid+' .step-panel');
+  const pills=document.querySelectorAll('#'+sid+' .sp');
+  panels.forEach(p=>p.classList.remove('active'));
+  pills.forEach(b=>b.classList.remove('active'));
+  panels[n].classList.add('active');
+  pills[n].classList.add('active');
+  cursors[sid]=n;
+}
+function nextStep(sid,total){
+  const c=(cursors[sid]||0);
+  if(c<total-1){
+    const pills=document.querySelectorAll('#'+sid+' .sp');
+    step(sid,c+1,pills[c+1]);
   }
+}
+function prevStep(sid){
+  const c=(cursors[sid]||0);
+  if(c>0){
+    const pills=document.querySelectorAll('#'+sid+' .sp');
+    step(sid,c-1,pills[c-1]);
+  }
+}
 
-  // AE Steps
-  let curStep = 0;
-  const totalSteps = 6;
-  function showStep(n) {
-    document.getElementById('sp-' + curStep).classList.remove('active');
-    document.querySelectorAll('.step-pill')[curStep].classList.remove('active');
-    curStep = n;
-    document.getElementById('sp-' + curStep).classList.add('active');
-    document.querySelectorAll('.step-pill')[curStep].classList.add('active');
-  }
-  function nextStep() { if (curStep < totalSteps - 1) showStep(curStep + 1); }
-  function prevStep() { if (curStep > 0) showStep(curStep - 1); }
+/* ── MULTIPLIER CALCULATOR ── */
+function calcMult(){
+  const mps=parseInt(document.getElementById('mps').value)/100;
+  const mrt=parseInt(document.getElementById('mrt').value)/100;
+  const mpm=parseInt(document.getElementById('mpm').value)/100;
+  const inj=parseInt(document.getElementById('inj').value);
+  document.getElementById('mps-v').textContent=Math.round(mps*100)+'%';
+  document.getElementById('mrt-v').textContent=Math.round(mrt*100)+'%';
+  document.getElementById('mpm-v').textContent=Math.round(mpm*100)+'%';
+  document.getElementById('inj-v').textContent='£'+inj+'bn';
+  const mult=1/(mps+mrt+mpm);
+  const gdp=mult*inj;
+  document.getElementById('mult-out').textContent=mult.toFixed(1)+'×';
+  document.getElementById('gdp-out').textContent='£'+Math.round(gdp)+'bn';
+}
+
+/* ── FISCAL SIMULATOR ── */
+function calcFiscal(){
+  const g=parseInt(document.getElementById('fg').value);
+  const t=parseInt(document.getElementById('ft').value);
+  const m=parseFloat(document.getElementById('fm').value);
+  document.getElementById('fg-v').textContent='£'+g+'bn';
+  document.getElementById('ft-v').textContent='£'+t+'bn';
+  document.getElementById('fm-v').textContent=m.toFixed(1)+'×';
+  const gdpBoost=Math.round((g+t)*m);
+  const budgetChange=-(g-t*0.5);
+  document.getElementById('fg-gdp').textContent='£'+gdpBoost+'bn';
+  const bc=Math.round(budgetChange);
+  document.getElementById('fg-bal').textContent=(bc>=0?'+':'')+'£'+bc+'bn';
+  const stance=(g+t)>0?'Expansionary':'Neutral';
+  document.getElementById('fg-stance').textContent=stance;
+  const card=document.getElementById('fbal-card');
+  if(bc>=0){card.style.background='var(--green-bg)';card.style.borderColor='var(--green-b)';document.getElementById('fg-bal').style.color='var(--green)';}
+  else{card.style.background='var(--red-bg)';card.style.borderColor='var(--red-b)';document.getElementById('fg-bal').style.color='var(--red)';}
+}
+
+/* ── RATE EFFECTS ── */
+function calcRate(){
+  const r=parseFloat(document.getElementById('rate-sl').value);
+  document.getElementById('rate-out').textContent=(r>=0?'+':'')+r+'%';
+  const effects=[
+    {id:'re-m', up:'Costs ↑ — mortgages expensive, housing market cools', dn:'Costs ↓ — housing market stimulated', ne:'→ unchanged'},
+    {id:'re-b', up:'Borrowing costly → firms defer investment', dn:'Cheap credit → firms invest more', ne:'→ unchanged'},
+    {id:'re-s', up:'Savers benefit → more incentive to save, less to spend', dn:'Saving less rewarding → incentive to spend', ne:'→ unchanged'},
+    {id:'re-fx', up:'£ appreciates → exports dearer, imports cheaper', dn:'£ depreciates → exports cheaper, imports dearer', ne:'→ unchanged'},
+    {id:'re-ad', up:'AD falls — less consumption and investment', dn:'AD rises — more spending stimulated', ne:'→ unchanged'},
+    {id:'re-inf', up:'Inflation falls (with 18-month lag)', dn:'Inflation rises (risk if economy near full capacity)', ne:'→ unchanged'},
+  ];
+  const colors=[
+    {id:'rc-mortgage',up:'var(--red-bg)',dn:'var(--green-bg)'},
+    {id:'rc-biz',up:'var(--red-bg)',dn:'var(--green-bg)'},
+    {id:'rc-save',up:'var(--green-bg)',dn:'var(--red-bg)'},
+    {id:'rc-fx',up:'var(--amber-bg)',dn:'var(--amber-bg)'},
+    {id:'rc-ad',up:'var(--red-bg)',dn:'var(--green-bg)'},
+    {id:'rc-inf',up:'var(--green-bg)',dn:'var(--red-bg)'},
+  ];
+  effects.forEach((e,i)=>{
+    const el=document.getElementById(e.id);
+    const card=document.getElementById(colors[i].id);
+    if(r>0){el.textContent=e.up;card.style.background=colors[i].up;}
+    else if(r<0){el.textContent=e.dn;card.style.background=colors[i].dn;}
+    else{el.textContent=e.ne;card.style.background='var(--cream)';}
+  });
+}
 </script>
-
 </body>
 </html>
